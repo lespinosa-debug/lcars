@@ -49,8 +49,9 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .nf{width:108px;background:var(--p);flex-shrink:0;transition:background 30s linear;}
 .ng{width:10px;background:var(--bg);flex-shrink:0;}
 .nb{flex:1;display:flex;gap:3px;background:var(--bg);}
-.nt{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border:none;outline:none;color:var(--bg);transition:filter 0.15s;}
-.nt.active{filter:brightness(1.08);}.nt:not(.active){filter:brightness(0.48);}.nt:hover:not(.active){filter:brightness(0.72);}
+.nt{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border:none;outline:none;color:var(--bg);transition:filter 0.15s,transform 0.15s,box-shadow 0.15s;position:relative;z-index:1;}
+.nt.active{filter:brightness(1.12);transform:translateY(-5px);z-index:10;border-radius:6px 6px 0 0;box-shadow:0 -4px 14px rgba(0,0,0,0.6);}
+.nt:not(.active){filter:brightness(0.48);}.nt:hover:not(.active){filter:brightness(0.72);transform:translateY(-2px);}
 .ne{width:68px;flex-shrink:0;margin-left:10px;background:var(--a1);}
 .nh{background:var(--p);}.nsc{background:var(--g);}.ngig{background:var(--a1);}.ntsk{background:var(--a2);}
 .nid{background:var(--a3);color:#222!important;}.nsys{background:var(--a4);color:#222!important;}.nmp{background:#4488FF;}.nst{background:#223366;}.nwx{background:#2255AA;}
@@ -291,6 +292,24 @@ canvas{display:block;}
 
     <!-- HOME -->
     <div id="page-home" class="page active">
+
+      <!-- CLAUDE CHAT BAR -->
+      <div class="pn" style="border-left-color:var(--g);">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+          <div class="phl" style="color:var(--g);opacity:1;font-size:0.6rem;letter-spacing:0.18em;">◈ CLAUDE — LCARS COMMAND INTERFACE</div>
+          <div id="claude-turns" style="margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.46rem;color:var(--dim);"></div>
+          <button onclick="clearClaude()" style="background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.2);color:var(--dim);font-family:'Antonio',sans-serif;font-size:0.46rem;font-weight:700;letter-spacing:0.1em;padding:2px 7px;cursor:pointer;text-transform:uppercase;">CLR</button>
+        </div>
+        <!-- Conversation history -->
+        <div id="claude-history" style="max-height:140px;overflow-y:auto;margin-bottom:8px;display:none;border:1px solid rgba(0,255,136,0.1);padding:6px 8px;"></div>
+        <!-- Auto briefing -->
+        <div id="claude-briefing" style="margin-bottom:8px;font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--g);line-height:1.7;letter-spacing:0.03em;border-left:2px solid rgba(0,255,136,0.3);padding-left:8px;display:none;"></div>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <input id="claude-input" type="text" placeholder="ENTER COMMAND..." style="flex:1;background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.3);color:var(--g);font-family:'Antonio',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;padding:8px 12px;outline:none;text-transform:uppercase;" onkeydown="if(event.key==='Enter')sendToClaude()"/>
+          <button onclick="sendToClaude()" style="background:var(--g);color:#000;border:none;font-family:'Antonio',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;padding:8px 14px;cursor:pointer;text-transform:uppercase;">SEND</button>
+        </div>
+        <div id="claude-loading" style="margin-top:6px;font-family:'Share Tech Mono',monospace;font-size:0.52rem;color:var(--dim);display:none;animation:bl 0.8s step-end infinite;">▋ PROCESSING...</div>
+      </div>
       <div class="pn">
         <div class="ph" onclick="P('schedule')">
           <div class="phl" style="color:var(--g)">Today's Schedule</div>
@@ -603,7 +622,109 @@ canvas{display:block;}
 
 </div><!-- /app -->
 <script>
-// ═══════════════════ THEME ENGINE ═══════════════════
+// ═══════════════════ CLAUDE API v2 ═══════════════════
+const API_URL = 'https://lcars-api.onrender.com';
+const SESSION_ID = 'lcars-' + Date.now();
+let chatHistory = [];
+
+async function sendToClaude(){
+  const input = document.getElementById('claude-input');
+  const loading = document.getElementById('claude-loading');
+  const msg = input.value.trim();
+  if(!msg) return;
+  input.value = '';
+
+  // Add user message to UI
+  addToHistory('USER', msg, 'rgba(255,153,0,0.7)');
+  loading.style.display = 'block';
+
+  try {
+    const res = await fetch(`${API_URL}/api/chat`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ message: msg, sessionId: SESSION_ID, context: 'LCARS Home Dashboard' })
+    });
+    const data = await res.json();
+    loading.style.display = 'none';
+    addToHistory('LCARS', data.response || data.error, 'var(--g)');
+    if(data.turns) {
+      const turns = document.getElementById('claude-turns');
+      if(turns) turns.textContent = `${data.turns} TURNS`;
+    }
+  } catch(e) {
+    loading.style.display = 'none';
+    addToHistory('ERROR', 'Cannot reach LCARS API — ' + e.message, 'var(--a1)');
+  }
+}
+
+function addToHistory(role, text, color){
+  chatHistory.push({role, text});
+  const hist = document.getElementById('claude-history');
+  if(!hist) return;
+  hist.style.display = 'block';
+  // Hide briefing once chat starts
+  const brief = document.getElementById('claude-briefing');
+  if(brief && chatHistory.length > 0) brief.style.display = 'none';
+
+  const entry = document.createElement('div');
+  entry.style.cssText = `margin-bottom:6px;font-family:'Share Tech Mono',monospace;font-size:0.55rem;line-height:1.5;`;
+  entry.innerHTML = `<span style="color:${color};font-weight:700;letter-spacing:0.1em;">${role} ▸ </span><span style="color:rgba(255,255,255,0.75);">${text}</span>`;
+  hist.appendChild(entry);
+  hist.scrollTop = hist.scrollHeight;
+}
+
+async function clearClaude(){
+  chatHistory = [];
+  const hist = document.getElementById('claude-history');
+  if(hist){ hist.innerHTML = ''; hist.style.display = 'none'; }
+  const turns = document.getElementById('claude-turns');
+  if(turns) turns.textContent = '';
+  try {
+    await fetch(`${API_URL}/api/chat/clear`, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ sessionId: SESSION_ID })
+    });
+  } catch(e){}
+  // Reload briefing
+  loadBriefing();
+}
+
+async function loadBriefing(){
+  const brief = document.getElementById('claude-briefing');
+  if(!brief) return;
+  try {
+    const res = await fetch(`${API_URL}/api/briefing`);
+    const data = await res.json();
+    if(data.briefing && chatHistory.length === 0){
+      brief.innerHTML = data.briefing.replace(/\n/g,'<br>');
+      brief.style.display = 'block';
+    }
+  } catch(e){ console.log('Briefing offline'); }
+}
+
+// Load Google Calendar iCal feed
+async function loadCalendar(){
+  // To enable: set your Google Calendar public iCal URL here
+  // Get it from: Google Calendar → Settings → [calendar] → Integrate calendar → iCal URL
+  const ICAL_URL = ''; // paste your iCal URL here when ready
+  if(!ICAL_URL) return;
+  try {
+    const res = await fetch(`${API_URL}/api/calendar?url=${encodeURIComponent(ICAL_URL)}`);
+    const data = await res.json();
+    if(data.events && data.events.length > 0) renderCalendarEvents(data.events);
+  } catch(e){ console.log('Calendar feed offline'); }
+}
+
+function renderCalendarEvents(events){
+  const container = document.querySelector('#page-schedule .pn.pgr .phl + div') || 
+                    document.getElementById('live-calendar-events');
+  if(!container) return;
+  // Future: inject live events into schedule panels
+  console.log('Live calendar events:', events.length);
+}
+
+loadBriefing();
+loadCalendar();
 const SR=7+9/60,SS=19+42/60;
 const TH={
   classic:{p:'#FF9900',s:'#FFCC99',a1:'#CC4444',a2:'#9999CC',a3:'#CCAAFF',a4:'#FFCC66',bg:'#000000',bg2:'#0a0500',dim:'#553300',name:'CLASSIC // DAY'},
