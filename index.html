@@ -170,6 +170,7 @@
 <style>
 :root{--p:#FF9900;--s:#FFCC99;--a1:#CC4444;--a2:#9999CC;--a3:#CCAAFF;--a4:#FFCC66;--bg:#000;--bg2:#0a0500;--dim:#553300;--g:#00FF88;--pb:rgba(255,153,0,0.15);--er:34px;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{font-size:10px;}
 html,body{height:100%;height:-webkit-fill-available;background:var(--bg);overflow:hidden;font-family:'Antonio',sans-serif;color:#fff;font-weight:700;touch-action:manipulation;}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);pointer-events:none;z-index:9999;}
 #ts{position:fixed;top:env(safe-area-inset-top,0);left:0;right:0;height:3px;z-index:10000;background:linear-gradient(90deg,var(--p),var(--a2),var(--a1));transition:background 30s linear;}
@@ -185,11 +186,14 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .ht{font-size:clamp(0.85rem,3vw,1.5rem);font-weight:800;letter-spacing:0.1em;color:#fff;text-transform:uppercase;white-space:nowrap;}
 .hr{margin-left:auto;text-align:right;padding-left:8px;}
 .hs{font-family:'Share Tech Mono',monospace;font-size:clamp(0.62rem,2vw,0.78rem);color:#fff;letter-spacing:0.06em;line-height:1.75;font-weight:800;}
-.hp{width:56px;background:var(--s);border-radius:0 var(--er) 0 0;flex-shrink:0;margin-left:6px;transition:background 30s;}
+.hp{width:68px;background:var(--s);border-radius:0 var(--er) 0 0;flex-shrink:0;margin-left:6px;transition:background 30s;}
 
 /* MODE BAR */
 .mb{height:24px;flex-shrink:0;display:flex;align-items:center;background:var(--bg2);border-bottom:1px solid var(--pb);padding:0 10px 0 96px;gap:10px;transition:background 30s;}
-.ms{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:800;}
+.ms{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:800;background:none;border:none;outline:none;cursor:pointer;padding:2px 5px;border-radius:3px;transition:background 0.15s;-webkit-appearance:none;}
+.ms:hover{background:rgba(255,255,255,0.1);}
+.ms:active{background:rgba(255,255,255,0.2);}
+.ms.theme-locked{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);}
 .md{width:5px;height:5px;border-radius:50%;}
 .ma{color:#fff;font-weight:800;}.mi{color:rgba(255,255,255,0.3);}
 #sp-w{flex:1;height:3px;background:rgba(255,255,255,0.12);border-radius:2px;overflow:hidden;margin:0 6px;}
@@ -382,16 +386,26 @@ canvas{display:block;}
     <div class="ht">LRE // CMD</div>
     <div class="hr"><div class="hs">STARDATE <span id="sd"></span></div><div class="hs" id="lt"></div></div>
   </div>
-  <div class="hp"></div>
+  <div class="hp" style="display:flex;align-items:center;justify-content:center;position:relative;">
+    <svg viewBox="0 0 56 70" width="38" height="48" style="filter:drop-shadow(0 0 6px rgba(0,0,0,0.6));">
+      <!-- Starfleet delta shield -->
+      <path d="M28 4 L50 58 L28 48 L6 58 Z" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.9)" stroke-width="1.5"/>
+      <path d="M28 4 L50 58 L28 48 L6 58 Z" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+      <!-- Inner accent line -->
+      <path d="M28 12 L44 52 L28 44 L12 52 Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="0.75"/>
+      <!-- LRE text -->
+      <text x="28" y="38" text-anchor="middle" font-family="Antonio,sans-serif" font-size="9" font-weight="800" fill="#fff" letter-spacing="1.5">LRE</text>
+    </svg>
+  </div>
 </div>
 
 <!-- MODE BAR -->
 <div class="mb">
-  <div class="ms" id="seg-dawn"><div class="md" style="background:#FF6633"></div><span>DAWN</span></div>
-  <div class="ms" id="seg-day"><div class="md" style="background:#FF9900"></div><span>DAY</span></div>
-  <div class="ms" id="seg-tng"><div class="md" style="background:#4499FF"></div><span>TNG</span></div>
-  <div class="ms" id="seg-dusk"><div class="md" style="background:#CC6622"></div><span>DUSK</span></div>
-  <div class="ms" id="seg-night"><div class="md" style="background:#6633AA"></div><span>NIGHT</span></div>
+  <button class="ms" id="seg-dawn" onclick="lockTheme('dawn')" title="Force Dawn theme"><div class="md" style="background:#FF6633"></div><span>DAWN</span></button>
+  <button class="ms" id="seg-day" onclick="lockTheme('day')" title="Force Day theme"><div class="md" style="background:#FF9900"></div><span>DAY</span></button>
+  <button class="ms" id="seg-tng" onclick="lockTheme('tng')" title="Force TNG theme"><div class="md" style="background:#4499FF"></div><span>TNG</span></button>
+  <button class="ms" id="seg-dusk" onclick="lockTheme('dusk')" title="Force Dusk theme"><div class="md" style="background:#CC6622"></div><span>DUSK</span></button>
+  <button class="ms" id="seg-night" onclick="lockTheme('night')" title="Force Night theme"><div class="md" style="background:#6633AA"></div><span>NIGHT</span></button>
   <div id="sp-w"><div id="sp" style="width:0%"></div></div>
   <div id="sl">☀ 07:09 ☽ 19:42</div>
   <div id="wx-mini"><span>⛅</span><span id="wx-mini-val">LOADING WX...</span></div>
@@ -733,7 +747,32 @@ canvas{display:block;}
 
 </div><!-- /app -->
 <script>
-// ═══ THEME ENGINE ═══
+// ═══ THEME LOCK (clickable segments) ═══
+const THEME_LOCK_KEY = 'lcars-theme-lock';
+let themeLock = sessionStorage.getItem(THEME_LOCK_KEY) || null;
+
+const THEME_FORCE = {
+  dawn: { h: 6.5 },   // forces dawn time
+  day:  { h: 10 },    // forces classic day
+  tng:  { h: 13.5 },  // forces TNG midday
+  dusk: { h: 20 },    // forces dusk
+  night:{ h: 23 },    // forces night
+};
+
+function lockTheme(name){
+  if(themeLock === name){
+    // Toggle off — back to auto
+    themeLock = null;
+    sessionStorage.removeItem(THEME_LOCK_KEY);
+    document.querySelectorAll('.ms').forEach(el => el.classList.remove('theme-locked'));
+  } else {
+    themeLock = name;
+    sessionStorage.setItem(THEME_LOCK_KEY, name);
+    document.querySelectorAll('.ms').forEach(el => el.classList.remove('theme-locked'));
+    document.getElementById('seg-' + name)?.classList.add('theme-locked');
+  }
+  applyTheme();
+}
 const SR=7+9/60,SS=19+42/60;
 const TH={
   classic:{p:'#FF9900',s:'#FFCC99',a1:'#CC4444',a2:'#9999CC',a3:'#CCAAFF',a4:'#FFCC66',bg:'#000000',bg2:'#0a0500',dim:'#553300',name:'CLASSIC // DAY'},
@@ -762,7 +801,10 @@ function getTheme(h){
   return{th,badge};
 }
 function applyTheme(){
-  const now=new Date(),h=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
+  const now=new Date();
+  let h=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
+  // Override with locked theme if set
+  if(themeLock && THEME_FORCE[themeLock]) h=THEME_FORCE[themeLock].h;
   const{th,badge}=getTheme(h);
   const r=document.documentElement;
   r.style.setProperty('--p',th.p);r.style.setProperty('--s',th.s);
@@ -770,7 +812,7 @@ function applyTheme(){
   r.style.setProperty('--a3',th.a3);r.style.setProperty('--a4',th.a4);
   r.style.setProperty('--bg',th.bg);r.style.setProperty('--bg2',th.bg2);r.style.setProperty('--dim',th.dim);
   const tb=document.getElementById('tb');
-  if(tb){tb.textContent=badge;tb.style.borderColor=th.p;tb.style.color=th.p;}
+  if(tb){tb.textContent=themeLock?`◈ ${themeLock.toUpperCase()} LOCKED`:badge;tb.style.borderColor=th.p;tb.style.color=th.p;}
   const ts=document.getElementById('ts');
   if(ts)ts.style.background=`linear-gradient(90deg,${th.p},${th.a2},${th.a1})`;
   const segs={dawn:[SR-.5,SR+1.5],day:[SR+1.5,SR+2],tng:[SR+2,SS-1.5],dusk:[SS-1.5,SS+1],night:[SS+1,24+SR-.5]};
@@ -778,13 +820,18 @@ function applyTheme(){
   Object.keys(segs).forEach(s=>{
     const el=document.getElementById('seg-'+s);if(!el)return;
     const[a,b]=segs[s];
-    const isActive=h>=a&&h<b;
-    el.className='ms '+(isActive?'ma':'mi');
+    const isActive=themeLock?themeLock===s:(h>=a&&h<b);
+    el.className='ms '+(isActive?'ma':'mi')+(themeLock===s?' theme-locked':'');
     const span=el.querySelector('span');
     if(span)span.style.color=isActive?segColors[s]:'rgba(255,255,255,0.3)';
   });
   const dl=SS-SR,prog=Math.max(0,Math.min(100,((h-SR)/dl)*100));
   const sp=document.getElementById('sp');if(sp){sp.style.width=prog+'%';sp.style.background=th.p;}
+}
+// Restore lock from session on load
+if(themeLock){
+  const el=document.getElementById('seg-'+themeLock);
+  if(el)el.classList.add('theme-locked');
 }
 applyTheme();setInterval(applyTheme,30000);
 
