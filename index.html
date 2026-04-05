@@ -2,175 +2,317 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>LCARS — ESPINOSA COMMAND</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LCARS CMD">
+<meta name="theme-color" content="#000000">
+<title>LCARS — ESPINOSA COMMAND v3</title>
+<style id="lcars-icons">
+/* LCARS ICON SYSTEM */
+.ico{display:inline-block;vertical-align:middle;flex-shrink:0;}
+.ico svg{display:block;}
+</style>
+<!-- LCARS SVG SYMBOL LIBRARY -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <!-- DELTA SHIELD (Starfleet) -->
+  <symbol id="ico-delta" viewBox="0 0 24 24">
+    <path d="M12 2 L20 20 L12 16 L4 20 Z" fill="currentColor"/>
+    <path d="M12 2 L20 20 L12 16 L4 20 Z" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="0.5"/>
+  </symbol>
+  <!-- CRESCENT MOON -->
+  <symbol id="ico-moon" viewBox="0 0 24 24">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/>
+    <circle cx="17" cy="6" r="1" fill="currentColor" opacity="0.7"/>
+    <circle cx="20" cy="9" r="0.7" fill="currentColor" opacity="0.5"/>
+    <circle cx="19" cy="4" r="0.5" fill="currentColor" opacity="0.4"/>
+  </symbol>
+  <!-- EXERCISE / WORKOUT (LCARS bar set) -->
+  <symbol id="ico-workout" viewBox="0 0 24 24">
+    <rect x="2" y="10" width="4" height="4" rx="1" fill="currentColor"/>
+    <rect x="10" y="6" width="4" height="12" rx="1" fill="currentColor"/>
+    <rect x="18" y="10" width="4" height="4" rx="1" fill="currentColor"/>
+    <rect x="6" y="9" width="4" height="6" rx="0.5" fill="currentColor" opacity="0.8"/>
+    <rect x="14" y="9" width="4" height="6" rx="0.5" fill="currentColor" opacity="0.8"/>
+  </symbol>
+  <!-- DATA NODE (Ideas) -->
+  <symbol id="ico-idea" viewBox="0 0 24 24">
+    <polygon points="12,3 19,7.5 19,16.5 12,21 5,16.5 5,7.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="12" cy="12" r="3" fill="currentColor"/>
+    <line x1="12" y1="3" x2="12" y2="9" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="12" y1="15" x2="12" y2="21" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="5" y1="7.5" x2="9.5" y2="10" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="14.5" y1="14" x2="19" y2="16.5" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="19" y1="7.5" x2="14.5" y2="10" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="9.5" y1="14" x2="5" y2="16.5" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+  </symbol>
+  <!-- CALENDAR (LCARS grid) -->
+  <symbol id="ico-cal" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="17" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="3" y1="9" x2="21" y2="9" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="8" y1="4" x2="8" y2="7" stroke="currentColor" stroke-width="2"/>
+    <line x1="16" y1="4" x2="16" y2="7" stroke="currentColor" stroke-width="2"/>
+    <rect x="6" y="12" width="3" height="2" rx="0.5" fill="currentColor"/>
+    <rect x="10.5" y="12" width="3" height="2" rx="0.5" fill="currentColor"/>
+    <rect x="15" y="12" width="3" height="2" rx="0.5" fill="currentColor"/>
+    <rect x="6" y="16" width="3" height="2" rx="0.5" fill="currentColor"/>
+    <rect x="10.5" y="16" width="3" height="2" rx="0.5" fill="currentColor"/>
+  </symbol>
+  <!-- LOCATION BEACON (LCARS ping) -->
+  <symbol id="ico-loc" viewBox="0 0 24 24">
+    <circle cx="12" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="12" cy="10" r="1.5" fill="currentColor"/>
+    <path d="M12 14 L12 21" stroke="currentColor" stroke-width="1.5"/>
+    <ellipse cx="12" cy="21" rx="4" ry="1.5" fill="none" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <circle cx="12" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+  </symbol>
+  <!-- HOME / STRUCTURE -->
+  <symbol id="ico-home" viewBox="0 0 24 24">
+    <polygon points="12,3 22,11 19,11 19,20 14,20 14,15 10,15 10,20 5,20 5,11 2,11" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <rect x="9" y="4" width="6" height="4" rx="0.5" fill="currentColor" opacity="0.4"/>
+  </symbol>
+  <!-- VIEWSCREEN (video/gig) -->
+  <symbol id="ico-video" viewBox="0 0 24 24">
+    <rect x="2" y="5" width="15" height="11" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <polygon points="17,10 22,7 22,15" fill="currentColor"/>
+    <line x1="6" y1="19" x2="18" y2="19" stroke="currentColor" stroke-width="2"/>
+    <line x1="12" y1="16" x2="12" y2="19" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="6" y1="9" x2="12" y2="9" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="6" y1="12" x2="10" y2="12" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+  </symbol>
+  <!-- CHECKMARK (LCARS style) -->
+  <symbol id="ico-check" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <polyline points="7,12 10,16 17,8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <!-- SYSTEM / HEX -->
+  <symbol id="ico-sys" viewBox="0 0 24 24">
+    <polygon points="12,2 20,6.5 20,15.5 12,20 4,15.5 4,6.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <polygon points="12,7 16,9.5 16,14.5 12,17 8,14.5 8,9.5" fill="none" stroke="currentColor" stroke-width="1" opacity="0.6"/>
+    <circle cx="12" cy="12" r="2" fill="currentColor"/>
+  </symbol>
+  <!-- MAP / GRID -->
+  <symbol id="ico-map" viewBox="0 0 24 24">
+    <rect x="2" y="2" width="20" height="20" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <line x1="2" y1="8" x2="22" y2="8" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+    <line x1="2" y1="14" x2="22" y2="14" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+    <line x1="8" y1="2" x2="8" y2="22" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+    <line x1="14" y1="2" x2="14" y2="22" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+    <circle cx="11" cy="11" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="11" cy="11" r="1" fill="currentColor"/>
+    <line x1="13" y1="13" x2="17" y2="17" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- DATA BARS (weekly review) -->
+  <symbol id="ico-chart" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="18" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <rect x="6" y="14" width="3" height="5" rx="0.5" fill="currentColor"/>
+    <rect x="10.5" y="10" width="3" height="9" rx="0.5" fill="currentColor"/>
+    <rect x="15" y="7" width="3" height="12" rx="0.5" fill="currentColor"/>
+    <line x1="3" y1="19" x2="21" y2="19" stroke="currentColor" stroke-width="1"/>
+  </symbol>
+  <!-- WEATHER: CLEAR -->
+  <symbol id="ico-wx-clear" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="4" fill="currentColor"/>
+    <line x1="12" y1="2" x2="12" y2="5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="2" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="19" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="4.9" y1="4.9" x2="7.1" y2="7.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="16.9" y1="16.9" x2="19.1" y2="19.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="19.1" y1="4.9" x2="16.9" y2="7.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="7.1" y1="16.9" x2="4.9" y2="19.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <!-- WEATHER: PARTLY CLOUDY -->
+  <symbol id="ico-wx-cloud" viewBox="0 0 24 24">
+    <circle cx="10" cy="10" r="3" fill="currentColor" opacity="0.8"/>
+    <line x1="10" y1="3" x2="10" y2="5" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="17" y1="10" x2="15" y2="10" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="15" y1="5" x2="13.5" y2="6.5" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <path d="M7 16 Q7 13 10 13 Q11 10 14 11 Q17 11 17 14 Q19 14 19 16.5 Q19 19 16 19 L8 19 Q5 19 5 16.5 Q5 14 7 16Z" fill="currentColor" opacity="0.9"/>
+  </symbol>
+  <!-- WEATHER: RAIN -->
+  <symbol id="ico-wx-rain" viewBox="0 0 24 24">
+    <path d="M6 16 Q6 12 10 12 Q11 9 14 10 Q17 10 17 13 Q19 13 19 15.5 Q19 18 16 18 L7 18 Q4 18 4 15.5 Q4 13 6 16Z" fill="currentColor"/>
+    <line x1="8" y1="20" x2="7" y2="23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+    <line x1="12" y1="20" x2="11" y2="23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+    <line x1="16" y1="20" x2="15" y2="23" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  </symbol>
+  <!-- STARFLEET ARROWHEAD (deploy/launch) -->
+  <symbol id="ico-launch" viewBox="0 0 24 24">
+    <path d="M12 2 L22 22 L12 17 L2 22 Z" fill="currentColor"/>
+    <path d="M12 2 L22 22 L12 17 L2 22 Z" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    <line x1="12" y1="10" x2="12" y2="17" stroke="rgba(0,0,0,0.3)" stroke-width="1.5"/>
+  </symbol>
+  <!-- GEAR / SETTINGS -->
+  <symbol id="ico-gear" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M16.9 16.9l2.1 2.1M19.1 4.9l-2.1 2.1M7.1 16.9l-2.1 2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  <!-- STARS (stellar cartography) -->
+  <symbol id="ico-stars" viewBox="0 0 24 24">
+    <polygon points="12,2 13.5,9 20,9 14.5,13.5 16.5,20.5 12,16 7.5,20.5 9.5,13.5 4,9 10.5,9" fill="currentColor"/>
+    <circle cx="5" cy="5" r="1" fill="currentColor" opacity="0.6"/>
+    <circle cx="19" cy="4" r="0.7" fill="currentColor" opacity="0.5"/>
+    <circle cx="21" cy="16" r="0.8" fill="currentColor" opacity="0.4"/>
+    <circle cx="3" cy="18" r="0.6" fill="currentColor" opacity="0.5"/>
+  </symbol>
+  <!-- WEATHER ICON PLACEHOLDER -->
+  <symbol id="ico-wx-temp" viewBox="0 0 24 24">
+    <rect x="10" y="3" width="4" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="12" cy="18" r="3" fill="currentColor"/>
+    <rect x="11" y="5" width="2" height="9" rx="1" fill="currentColor" opacity="0.6"/>
+    <line x1="14" y1="7" x2="16" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="14" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="14" y1="13" x2="16" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+</svg>
 <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-:root {
-  --p:#FF9900;--s:#FFCC99;--a1:#CC4444;--a2:#9999CC;--a3:#CCAAFF;--a4:#FFCC66;
-  --bg:#000;--bg2:#0a0500;--dim:#553300;--g:#00FF88;--pb:rgba(255,153,0,0.15);--er:34px;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;background:var(--bg);overflow:hidden;font-family:'Antonio',sans-serif;color:var(--p);}
+:root{--p:#FF9900;--s:#FFCC99;--a1:#CC4444;--a2:#9999CC;--a3:#CCAAFF;--a4:#FFCC66;--bg:#000;--bg2:#0a0500;--dim:#553300;--g:#00FF88;--pb:rgba(255,153,0,0.15);--er:34px;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;height:-webkit-fill-available;background:var(--bg);overflow:hidden;font-family:'Antonio',sans-serif;color:#fff;font-weight:700;touch-action:manipulation;}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.07) 2px,rgba(0,0,0,0.07) 4px);pointer-events:none;z-index:9999;}
-
-/* THEME STRIP */
-#ts{position:fixed;top:0;left:0;right:0;height:3px;z-index:10000;background:linear-gradient(90deg,var(--p),var(--a2),var(--a1));transition:background 30s linear;}
-#tb{position:fixed;top:6px;right:8px;z-index:10001;font-family:'Share Tech Mono',monospace;font-size:0.48rem;font-weight:700;letter-spacing:0.14em;padding:2px 7px;border-radius:3px;background:rgba(0,0,0,0.8);border:1px solid var(--p);color:var(--p);transition:all 2s ease;text-transform:uppercase;}
-
-#app{display:flex;flex-direction:column;height:100vh;width:100vw;}
+#ts{position:fixed;top:env(safe-area-inset-top,0);left:0;right:0;height:3px;z-index:10000;background:linear-gradient(90deg,var(--p),var(--a2),var(--a1));transition:background 30s linear;}
+#tb{position:fixed;bottom:52px;right:8px;z-index:10001;font-family:'Share Tech Mono',monospace;font-size:0.46rem;font-weight:700;letter-spacing:0.12em;padding:2px 6px;border-radius:3px;background:rgba(0,0,0,0.85);border:1px solid var(--p);color:var(--p);transition:all 2s;text-transform:uppercase;}
+#app{display:flex;flex-direction:column;height:100vh;height:-webkit-fill-available;width:100vw;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0);}
 
 /* HEADER */
-.lh{display:flex;align-items:stretch;height:66px;flex-shrink:0;}
-.he{width:108px;background:var(--p);border-radius:var(--er) 0 0 0;flex-shrink:0;position:relative;transition:background 30s linear;}
-.he::after{content:'';position:absolute;bottom:0;right:0;width:var(--er);height:var(--er);background:var(--bg);border-radius:var(--er) 0 0 0;transition:background 30s linear;}
-.hg{width:10px;background:var(--bg);flex-shrink:0;}
-.hb{flex:1;background:var(--p);display:flex;align-items:center;padding:0 18px;transition:background 30s linear;}
-.ht{font-size:2.1rem;font-weight:700;letter-spacing:0.22em;color:var(--bg);text-transform:uppercase;}
-.hr{margin-left:auto;text-align:right;}
-.hs{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(0,0,0,0.6);letter-spacing:0.08em;line-height:1.85;}
-.hp{width:68px;background:var(--s);border-radius:0 var(--er) 0 0;flex-shrink:0;margin-left:10px;transition:background 30s linear;}
+.lh{display:flex;align-items:stretch;height:58px;flex-shrink:0;}
+.he{width:80px;background:var(--p);border-radius:var(--er) 0 0 0;flex-shrink:0;position:relative;transition:background 30s;}
+.he::after{content:'';position:absolute;bottom:0;right:0;width:var(--er);height:var(--er);background:var(--bg);border-radius:var(--er) 0 0 0;transition:background 30s;}
+.hg{width:6px;background:var(--bg);flex-shrink:0;}
+.hb{flex:1;background:var(--p);display:flex;align-items:center;padding:0 14px;transition:background 30s;}
+.ht{font-size:clamp(0.85rem,3vw,1.5rem);font-weight:800;letter-spacing:0.1em;color:#fff;text-transform:uppercase;white-space:nowrap;}
+.hr{margin-left:auto;text-align:right;padding-left:8px;}
+.hs{font-family:'Share Tech Mono',monospace;font-size:clamp(0.62rem,2vw,0.78rem);color:#fff;letter-spacing:0.06em;line-height:1.75;font-weight:800;}
+.hp{width:56px;background:var(--s);border-radius:0 var(--er) 0 0;flex-shrink:0;margin-left:6px;transition:background 30s;}
 
 /* MODE BAR */
-.mb{height:24px;flex-shrink:0;display:flex;align-items:center;background:var(--bg2);border-bottom:1px solid var(--pb);padding:0 10px 0 118px;gap:14px;transition:background 30s linear;}
-.ms{display:flex;align-items:center;gap:4px;font-family:'Share Tech Mono',monospace;font-size:0.46rem;letter-spacing:0.1em;text-transform:uppercase;}
+.mb{height:24px;flex-shrink:0;display:flex;align-items:center;background:var(--bg2);border-bottom:1px solid var(--pb);padding:0 10px 0 96px;gap:10px;transition:background 30s;}
+.ms{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:800;}
 .md{width:5px;height:5px;border-radius:50%;}
-.ma{color:var(--p)}.mi{color:var(--dim)}
-#sp-w{flex:1;height:2px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden;margin:0 6px;}
-#sp{height:100%;border-radius:2px;background:var(--p);transition:width 60s linear;}
-#sl{font-family:'Share Tech Mono',monospace;font-size:0.44rem;color:var(--dim);letter-spacing:0.08em;}
+.ma{color:#fff;font-weight:800;}.mi{color:rgba(255,255,255,0.3);}
+#sp-w{flex:1;height:3px;background:rgba(255,255,255,0.12);border-radius:2px;overflow:hidden;margin:0 6px;}
+#sp{height:100%;border-radius:2px;background:#fff;transition:width 60s linear;}
+#sl{font-family:'Share Tech Mono',monospace;font-size:0.5rem;color:rgba(255,255,255,0.6);letter-spacing:0.06em;font-weight:700;}
+#wx-mini{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:0.5rem;color:#fff;white-space:nowrap;font-weight:700;}
 
-/* WEATHER MINI in mode bar */
-#wx-mini{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:0.46rem;color:var(--s);letter-spacing:0.08em;white-space:nowrap;}
-#wx-mini .wx-icon{font-size:0.7rem;}
-
-/* NAV */
-.ln{display:flex;height:34px;flex-shrink:0;}
-.nf{width:108px;background:var(--p);flex-shrink:0;transition:background 30s linear;}
-.ng{width:10px;background:var(--bg);flex-shrink:0;}
-.nb{flex:1;display:flex;gap:3px;background:var(--bg);}
-.nt{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;border:none;outline:none;color:var(--bg);transition:filter 0.15s,transform 0.15s,box-shadow 0.15s;position:relative;z-index:1;}
-.nt.active{filter:brightness(1.12);transform:translateY(-5px);z-index:10;border-radius:6px 6px 0 0;box-shadow:0 -4px 14px rgba(0,0,0,0.6);}
-.nt:not(.active){filter:brightness(0.48);}.nt:hover:not(.active){filter:brightness(0.72);transform:translateY(-2px);}
-.ne{width:68px;flex-shrink:0;margin-left:10px;background:var(--a1);}
-.nh{background:var(--p);}.nsc{background:var(--g);}.ngig{background:var(--a1);}.ntsk{background:var(--a2);}
-.nid{background:var(--a3);color:#222!important;}.nsys{background:var(--a4);color:#222!important;}.nmp{background:#4488FF;}.nst{background:#223366;}.nwx{background:#2255AA;}
+/* NAV DROPDOWN */
+.ln{display:flex;height:48px;flex-shrink:0;}
+.nf{width:96px;background:var(--p);flex-shrink:0;transition:background 30s;}
+.ng{width:6px;background:var(--bg);flex-shrink:0;}
+.nb{flex:1;display:flex;background:var(--p);transition:background 30s;align-items:center;padding:0 12px;gap:10px;}
+.ne{width:56px;background:var(--a1);flex-shrink:0;margin-left:6px;}.ng{width:10px;background:var(--bg);flex-shrink:0;}
+.nb{flex:1;display:flex;background:var(--p);transition:background 30s;}
+.ne{width:68px;background:var(--a1);flex-shrink:0;margin-left:10px;}
+.nav-item{display:block;width:100%;padding:12px 16px;background:transparent;border:none;border-bottom:1px solid rgba(255,153,0,0.15);color:var(--p);font-family:'Antonio',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.12em;text-align:left;cursor:pointer;text-transform:uppercase;-webkit-appearance:none;}
+.nav-item:hover{background:rgba(255,153,0,0.1);}
+.nav-item:active{background:rgba(255,153,0,0.2);}
+.nav-item.nh{color:var(--p);}.nav-item.nsc{color:var(--g);}.nav-item.ngig{color:var(--a1);}
+.nav-item.ntsk{color:var(--a2);}.nav-item.nid{color:var(--a3);}.nav-item.nsys{color:var(--a4);}
+.nav-item.nwx{color:#4499FF;}.nav-item.nmp{color:#4488FF;}.nav-item.nst{color:#8899DD;}
 
 /* BODY */
-.lbd{display:flex;flex:1;overflow:hidden;}
-.lsb{width:108px;flex-shrink:0;display:flex;flex-direction:column;gap:5px;padding:6px 0;align-items:flex-end;}
-.sb{border-radius:22px 0 0 22px;display:flex;align-items:center;justify-content:flex-end;padding-right:11px;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--bg);cursor:pointer;border:none;outline:none;transition:filter 0.15s;height:36px;width:98px;}
-.sb.sm{height:24px;width:78px;}
+.lb{display:flex;flex:1;overflow:hidden;}
+.lsb{width:96px;flex-shrink:0;display:flex;flex-direction:column;gap:5px;padding:6px 0;align-items:flex-end;}
+.sb{border-radius:22px 0 0 22px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:0.68rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#fff;cursor:pointer;border:none;outline:none;transition:filter 0.15s;height:38px;width:94px;-webkit-appearance:none;}
+.sb.sm{height:26px;width:80px;}
 .sb:hover{filter:brightness(1.3);}.sb:active{filter:brightness(0.7);}
 .s1{background:var(--p);}.s2{background:var(--s);}.s3{background:var(--a2);}.s4{background:var(--a1);}.s5{background:var(--a3);}.s6{background:var(--a4);}
 .ssp{flex:1;}
 .sdots{display:flex;flex-direction:column;gap:4px;padding:6px 9px 6px 0;}
 .dr{display:flex;align-items:center;gap:4px;}
-.dl{font-size:0.44rem;letter-spacing:0.1em;color:var(--dim);}
-.dot{width:8px;height:8px;border-radius:50%;}
+.dl{font-size:0.44rem;letter-spacing:0.1em;color:rgba(255,255,255,0.4);}
+.dot{width:9px;height:9px;border-radius:50%;}
 .don{background:var(--g);box-shadow:0 0 5px var(--g);animation:dp 2s infinite;}
 .dwn{background:var(--a4);box-shadow:0 0 5px var(--a4);}
 .dof{background:var(--dim);}
 
-.lg{width:10px;background:var(--bg);flex-shrink:0;}
-.lc{flex:1;overflow-y:auto;padding:5px 7px 5px 0;display:flex;flex-direction:column;gap:6px;}
+.lg{width:6px;background:var(--bg);flex-shrink:0;}
+.lc{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 8px 6px 0;display:flex;flex-direction:column;gap:7px;}
 
 /* FOOTER */
-.lf{display:flex;height:42px;flex-shrink:0;}
-.fe{width:108px;background:var(--p);border-radius:0 0 0 var(--er);flex-shrink:0;transition:background 30s linear;}
-.fg{width:10px;background:var(--bg);flex-shrink:0;}
-.fb{flex:1;background:var(--p);display:flex;align-items:center;padding:0 12px;gap:6px;transition:background 30s linear;}
-.fc{height:21px;padding:0 10px;border-radius:10px;background:var(--bg);font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--p);border:none;outline:none;cursor:pointer;font-family:'Antonio',sans-serif;transition:background 0.15s;}
-.fc:hover{background:rgba(0,0,0,0.6);}
-.ft{margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:var(--bg);letter-spacing:0.1em;font-weight:700;}
-.fp{width:68px;background:var(--a1);border-radius:0 0 var(--er) 0;flex-shrink:0;margin-left:10px;transition:background 30s linear;}
+.lf{display:flex;height:44px;flex-shrink:0;}
+.fe{width:96px;background:var(--p);border-radius:0 0 0 var(--er);flex-shrink:0;transition:background 30s;}
+.fg{width:6px;background:var(--bg);flex-shrink:0;}
+.fb{flex:1;background:var(--p);display:flex;align-items:center;padding:0 12px;gap:7px;transition:background 30s;}
+.fc{height:28px;padding:0 12px;border-radius:14px;background:rgba(0,0,0,0.25);font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,0.2);outline:none;cursor:pointer;font-family:'Antonio',sans-serif;-webkit-appearance:none;min-height:38px;min-width:48px;}
+.ft{margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#fff;letter-spacing:0.1em;font-weight:800;}
+.fp{width:56px;background:var(--a1);border-radius:0 0 var(--er) 0;flex-shrink:0;margin-left:6px;transition:background 30s;}.fg{width:6px;background:var(--bg);flex-shrink:0;}
+.fb{flex:1;background:var(--p);display:flex;align-items:center;padding:0 12px;gap:7px;transition:background 30s;}
+.fc{height:28px;padding:0 12px;border-radius:14px;background:var(--bg);font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#fff;border:none;outline:none;cursor:pointer;font-family:'Antonio',sans-serif;-webkit-appearance:none;min-height:38px;min-width:48px;}
+.fc:active{opacity:0.7;}
+.ft{margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--bg);letter-spacing:0.1em;font-weight:700;}
+.fp{width:68px;background:var(--a1);border-radius:0 0 var(--er) 0;flex-shrink:0;margin-left:10px;transition:background 30s;}
 
 /* PANELS */
-.pn{background:var(--bg);border:1px solid var(--pb);border-left:4px solid var(--p);padding:11px 13px;animation:fs .3s ease both;transition:border-color 30s linear;}
+.pn{background:var(--bg);border:1px solid var(--pb);border-left:4px solid var(--p);padding:11px 13px;animation:fs .3s ease both;transition:border-color 30s;}
 .pr{border-left-color:var(--a1);}.ppu{border-left-color:var(--a2);}.pli{border-left-color:var(--a3);}
-.pta{border-left-color:var(--a4);}.pbl{border-left-color:#4488FF;}.pnv{border-left-color:#4466AA;}.pgr{border-left-color:var(--g);}
-.pwx{border-left-color:#2255AA;}
+.pta{border-left-color:var(--a4);}.pbl{border-left-color:#4488FF;}.pnv{border-left-color:#4466AA;}.pgr{border-left-color:var(--g);}.pwx{border-left-color:#2255AA;}
 .pn:nth-child(1){animation-delay:.04s;}.pn:nth-child(2){animation-delay:.09s;}.pn:nth-child(3){animation-delay:.14s;}
 .pn:nth-child(4){animation-delay:.19s;}.pn:nth-child(5){animation-delay:.24s;}.pn:nth-child(6){animation-delay:.29s;}
 
 .ph{display:flex;align-items:center;gap:7px;margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid rgba(255,153,0,0.1);cursor:pointer;}
 .ph:hover .phl{opacity:1;}.ph:hover .pha{transform:translateX(3px);color:var(--p);}
-.phl{font-size:0.72rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;opacity:0.65;transition:opacity 0.15s;}
-.pid{margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.48rem;color:var(--dim);}
-.pha{font-size:0.5rem;color:var(--dim);transition:transform 0.2s,color 0.2s;}
+.phl{font-size:0.82rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;opacity:1;color:#fff;transition:opacity 0.15s;}
+.pid{margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.56rem;color:var(--dim);}
+.pha{font-size:0.6rem;color:var(--dim);transition:transform 0.2s,color 0.2s;}
 
 /* SCHEDULE */
-.si{display:flex;gap:9px;align-items:flex-start;padding:5px 0;border-bottom:1px solid rgba(255,153,0,0.07);}
+.si{display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,153,0,0.07);}
 .si:last-child{border-bottom:none;}
-.stm{font-family:'Share Tech Mono',monospace;font-size:0.65rem;font-weight:700;color:var(--s);min-width:44px;padding-top:1px;}
+.stm{font-family:'Share Tech Mono',monospace;font-size:0.78rem;font-weight:700;color:rgba(255,255,255,0.7);min-width:52px;padding-top:2px;}
 .sbar{width:3px;border-radius:2px;flex-shrink:0;align-self:stretch;min-height:16px;}
 .snw{background:var(--g);box-shadow:0 0 5px var(--g);}.swk{background:var(--a1);}.sps{background:var(--a2);}.san{background:var(--a4);}
 .sin{flex:1;}
-.sti{font-size:0.88rem;font-weight:700;letter-spacing:0.05em;color:var(--p);line-height:1.2;}
-.ssu{font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--dim);letter-spacing:0.07em;margin-top:2px;}
-.nbadge{font-size:0.44rem;background:var(--g);color:#000;padding:1px 5px;border-radius:3px;font-weight:700;letter-spacing:0.1em;margin-left:4px;animation:bl 1.2s step-end infinite;vertical-align:middle;}
+.sti{font-size:0.95rem;font-weight:700;letter-spacing:0.04em;color:#fff;line-height:1.2;}
+.ssu{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:rgba(255,255,255,0.5);letter-spacing:0.07em;margin-top:3px;}
+.nbadge{font-size:0.5rem;background:var(--g);color:#000;padding:1px 5px;border-radius:3px;font-weight:700;letter-spacing:0.1em;margin-left:4px;animation:bl 1.2s step-end infinite;vertical-align:middle;}
 
 /* GIGS */
-.gc{border:1px solid rgba(204,68,68,0.2);padding:8px 10px;margin-bottom:6px;}
+.gc{border:1px solid rgba(204,68,68,0.2);padding:11px 13px;margin-bottom:8px;}
 .gc:last-child{margin-bottom:0;}
-.gst{font-size:0.44rem;letter-spacing:0.15em;font-weight:700;text-transform:uppercase;padding:2px 5px;border-radius:2px;display:inline-block;margin-bottom:4px;}
+.gst{font-size:0.52rem;letter-spacing:0.15em;font-weight:700;text-transform:uppercase;padding:2px 6px;border-radius:2px;display:inline-block;margin-bottom:5px;}
 .stc{background:rgba(0,255,136,0.1);color:var(--g);border:1px solid var(--g);}
 .stu{background:rgba(255,153,0,0.1);color:var(--p);border:1px solid var(--p);}
-.gti{font-size:0.95rem;font-weight:700;letter-spacing:0.07em;color:var(--s);margin-bottom:3px;}
-.gme{font-family:'Share Tech Mono',monospace;font-size:0.55rem;color:var(--dim);line-height:1.65;}
-.gro{color:var(--a1);font-size:0.58rem;font-weight:700;letter-spacing:0.09em;margin-top:3px;}
+.gti{font-size:1rem;font-weight:700;letter-spacing:0.07em;color:#fff;margin-bottom:4px;}
+.gme{font-family:'Share Tech Mono',monospace;font-size:0.64rem;color:rgba(255,255,255,0.55);line-height:1.7;}
+.gro{color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.09em;margin-top:5px;}
 
 /* TASKS */
-.ti{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(153,153,204,0.1);cursor:pointer;}
+.ti{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid rgba(153,153,204,0.1);cursor:pointer;min-height:44px;}
 .ti:last-child{border-bottom:none;}
-.tck{width:12px;height:12px;border:1px solid rgba(153,153,204,0.4);border-radius:2px;flex-shrink:0;transition:all 0.2s;}
-.ti:hover .tck{border-color:var(--a2);}
+.tck{width:18px;height:18px;border:1px solid rgba(153,153,204,0.4);border-radius:3px;flex-shrink:0;transition:all 0.2s;}
 .ti.done .tck{background:var(--a2);border-color:var(--a2);}
 .ti.done .ttx{text-decoration:line-through;opacity:0.3;}
-.ttx{font-size:0.82rem;font-weight:700;letter-spacing:0.04em;color:var(--a2);flex:1;line-height:1.3;}
-.tpr{font-size:0.5rem;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;font-weight:700;}
+.ttx{font-size:0.9rem;font-weight:700;letter-spacing:0.04em;color:#fff;flex:1;line-height:1.3;}
+.tpr{font-size:0.52rem;letter-spacing:0.12em;color:rgba(255,255,255,0.4);text-transform:uppercase;font-weight:700;}
 .thi{color:var(--a1);}
 
 /* NUGGETS */
-.ni{display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px solid rgba(204,170,255,0.08);}
+.ni{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(204,170,255,0.08);}
 .ni:last-child{border-bottom:none;}
-.nico{font-size:0.7rem;flex-shrink:0;}
-.ntx{font-size:0.8rem;font-weight:700;color:var(--a3);letter-spacing:0.04em;line-height:1.4;flex:1;}
-.nts{font-family:'Share Tech Mono',monospace;font-size:0.44rem;color:var(--dim);flex-shrink:0;padding-top:2px;}
+.nico{font-size:0.85rem;flex-shrink:0;}
+.ntx{font-size:0.88rem;font-weight:700;color:#fff;letter-spacing:0.04em;line-height:1.4;flex:1;}
+.nts{font-family:'Share Tech Mono',monospace;font-size:0.52rem;color:rgba(255,255,255,0.35);flex-shrink:0;padding-top:2px;}
 
 /* SYSTEM */
-.sysg{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.sysn{border:1px solid rgba(255,204,102,0.15);padding:7px 8px;}
-.snn{font-size:0.48rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);margin-bottom:3px;font-weight:700;}
-.sns{font-size:0.72rem;font-weight:700;letter-spacing:0.07em;}
+.sysg{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.sysn{border:1px solid rgba(255,204,102,0.15);padding:8px 9px;}
+.snn{font-size:0.52rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:3px;font-weight:700;}
+.sns{font-size:0.78rem;font-weight:700;letter-spacing:0.07em;color:#fff;}
 .son{color:var(--g);}.swn{color:var(--a4);}.sof{color:var(--a1);}
-.sbw{margin-top:4px;height:2px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden;}
+.sbw{margin-top:5px;height:3px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
 .sbr{height:100%;border-radius:2px;}
 .bg{background:var(--g);}.by{background:var(--a4);}.brr{background:var(--a1);}
-.snv{font-family:'Share Tech Mono',monospace;font-size:0.46rem;color:var(--dim);margin-top:3px;font-weight:700;}
+.snv{font-family:'Share Tech Mono',monospace;font-size:0.5rem;color:rgba(255,255,255,0.35);margin-top:3px;font-weight:700;}
 
-/* WEATHER PANEL */
-.wx-hero{display:flex;align-items:center;gap:16px;padding:8px 0 10px;}
-.wx-temp{font-size:2.8rem;font-weight:700;letter-spacing:-0.02em;color:var(--p);line-height:1;}
-.wx-unit{font-size:1rem;color:var(--dim);}
-.wx-desc{flex:1;}
-.wx-cond{font-size:0.85rem;font-weight:700;letter-spacing:0.08em;color:var(--s);margin-bottom:3px;}
-.wx-loc{font-family:'Share Tech Mono',monospace;font-size:0.52rem;color:var(--dim);letter-spacing:0.08em;}
-.wx-icon-big{font-size:2.2rem;}
-.wx-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px;}
-.wx-cell{border:1px solid rgba(34,85,170,0.25);padding:6px 8px;}
-.wx-cn{font-size:0.46rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--dim);font-weight:700;margin-bottom:2px;}
+/* WEATHER */
+.wx-cell{border:1px solid rgba(34,85,170,0.25);padding:7px 9px;}
+.wx-cn{font-size:0.48rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:700;margin-bottom:2px;}
 .wx-cv{font-size:0.78rem;font-weight:700;color:#4499FF;letter-spacing:0.05em;}
-.wx-bar{margin-top:10px;}
-.wx-bar-label{font-size:0.5rem;letter-spacing:0.1em;color:var(--dim);font-weight:700;text-transform:uppercase;margin-bottom:4px;font-family:'Share Tech Mono',monospace;}
-.wx-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
-.wx-bar-name{font-family:'Share Tech Mono',monospace;font-size:0.48rem;color:var(--dim);width:20px;text-align:right;}
-.wx-bar-track{flex:1;height:3px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden;}
-.wx-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#2255AA,#44AAFF);}
-.wx-bar-val{font-family:'Share Tech Mono',monospace;font-size:0.48rem;color:#4499FF;width:28px;}
-.wx-status{font-family:'Share Tech Mono',monospace;font-size:0.46rem;color:var(--dim);margin-top:8px;letter-spacing:0.08em;}
 
-/* DEPLOY PANEL */
+/* DEPLOY */
 .deploy-step{border:1px solid rgba(0,255,136,0.15);padding:9px 11px;margin-bottom:6px;}
 .deploy-step:last-child{margin-bottom:0;}
 .ds-header{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
@@ -179,20 +321,18 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .ds-status{margin-left:auto;font-size:0.46rem;letter-spacing:0.12em;text-transform:uppercase;padding:1px 6px;border-radius:2px;font-weight:700;}
 .dst-ready{background:rgba(0,255,136,0.1);color:var(--g);border:1px solid var(--g);}
 .dst-next{background:rgba(255,153,0,0.1);color:var(--p);border:1px solid var(--p);}
-.dst-later{background:rgba(85,51,0,0.5);color:var(--dim);border:1px solid var(--dim);}
-.ds-body{font-family:'Share Tech Mono',monospace;font-size:0.53rem;color:var(--dim);line-height:1.7;letter-spacing:0.04em;}
-.ds-cmd{display:block;margin-top:4px;background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.15);padding:4px 8px;color:var(--g);font-size:0.5rem;border-radius:2px;letter-spacing:0.06em;}
+.dst-later{background:rgba(85,51,0,0.5);color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.15);}
+.ds-body{font-family:'Share Tech Mono',monospace;font-size:0.56rem;color:rgba(255,255,255,0.6);line-height:1.7;letter-spacing:0.04em;}
+.ds-cmd{display:block;margin-top:4px;background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.15);padding:4px 8px;color:var(--g);font-size:0.5rem;border-radius:2px;word-break:break-all;}
 
 /* PAGES */
 .page{display:none;flex-direction:column;gap:6px;}
 .page.active{display:flex;}
-#page-home{display:flex;flex-direction:column;gap:6px;}
-.dh{background:var(--bg);border:1px solid var(--pb);border-left:4px solid var(--p);padding:9px 13px;display:flex;align-items:center;gap:9px;cursor:pointer;}
-.dh:hover{background:rgba(255,153,0,0.03);}
-.bk{font-size:0.78rem;font-weight:700;letter-spacing:0.12em;color:var(--p);text-transform:uppercase;border:1px solid rgba(255,153,0,0.3);padding:3px 9px;border-radius:3px;}
-.dtit{font-size:1.15rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;}
+.dh{background:var(--bg);border:1px solid var(--pb);border-left:4px solid var(--p);padding:10px 13px;display:flex;align-items:center;gap:9px;cursor:pointer;}
+.bk{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;color:var(--p);text-transform:uppercase;border:1px solid rgba(255,153,0,0.3);padding:3px 8px;border-radius:3px;min-height:30px;display:flex;align-items:center;}
+.dtit{font-size:1rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;}
 
-/* MAP / STARS */
+/* MAP/STARS */
 #map-container,#star-map-container{width:100%;position:relative;overflow:hidden;background:#000510;}
 #map-container{height:260px;border:1px solid rgba(68,136,255,0.22);}
 #star-map-container{height:240px;background:#000208;border:1px solid rgba(68,102,170,0.22);}
@@ -202,16 +342,26 @@ canvas{display:block;}
 .mbo{position:absolute;bottom:7px;left:7px;font-family:'Share Tech Mono',monospace;font-size:0.48rem;letter-spacing:0.07em;pointer-events:none;}
 .mbr{position:absolute;bottom:7px;right:7px;font-family:'Share Tech Mono',monospace;font-size:0.48rem;letter-spacing:0.07em;text-align:right;pointer-events:none;}
 
+/* CLAUDE CHAT */
+.claude-input-row{display:flex;gap:6px;align-items:stretch;}
+.claude-inp{flex:1;background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.3);color:var(--g);font-family:'Antonio',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.08em;padding:10px 12px;outline:none;text-transform:uppercase;min-height:46px;-webkit-appearance:none;border-radius:0;}
+.claude-inp::placeholder{color:rgba(0,255,136,0.35);}
+.claude-send{background:var(--g);color:#000;border:none;font-family:'Antonio',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;padding:10px 16px;cursor:pointer;text-transform:uppercase;min-height:46px;min-width:68px;-webkit-appearance:none;border-radius:0;}
+.claude-send:active{opacity:0.8;}
+.claude-hist{max-height:140px;overflow-y:auto;-webkit-overflow-scrolling:touch;margin-bottom:8px;display:none;border:1px solid rgba(0,255,136,0.12);padding:7px 9px;}
+.claude-brief{margin-bottom:8px;font-family:'Share Tech Mono',monospace;font-size:0.56rem;color:var(--g);line-height:1.7;letter-spacing:0.03em;border-left:2px solid rgba(0,255,136,0.3);padding-left:9px;display:none;}
+.claude-load{margin-top:6px;font-family:'Share Tech Mono',monospace;font-size:0.52rem;color:var(--dim);display:none;animation:bl 0.8s step-end infinite;}
+
 /* LANDSCAPE */
 @media(orientation:landscape){
-  .lh{height:50px;}.he{width:86px;border-radius:25px 0 0 0;}.he::after{width:25px;height:25px;border-radius:25px 0 0 0;}
-  .hp{width:56px;border-radius:0 25px 0 0;}.ht{font-size:1.25rem;}
-  .mb{padding-left:96px;height:20px;}
-  .ln{height:28px;}.nf{width:86px;}.nt{font-size:0.56rem;}.ne{width:56px;}
-  .lsb{width:86px;}.sb{width:78px;height:32px;font-size:0.54rem;}.sb.sm{height:20px;width:62px;}
-  .lf{height:36px;}.fe{width:86px;border-radius:0 0 0 25px;}.fp{width:56px;border-radius:0 0 25px 0;}
-  .fc{font-size:0.44rem;}#map-container{height:200px;}#star-map-container{height:185px;}
-  .sysg{grid-template-columns:1fr 1fr 1fr;}.wx-grid{grid-template-columns:1fr 1fr 1fr 1fr;}
+  .lh{height:46px;}.he{width:80px;border-radius:25px 0 0 0;}.he::after{width:25px;height:25px;border-radius:25px 0 0 0;}
+  .hp{width:50px;border-radius:0 25px 0 0;}.ht{font-size:1.1rem;}
+  .mb{padding-left:90px;height:20px;}
+  .ln{height:34px;}.nf{width:80px;}.ne{width:50px;}
+  .lsb{width:84px;}.sb{width:82px;height:32px;font-size:0.62rem;}.sb.sm{height:22px;width:64px;}
+  .lf{height:40px;}.fe{width:80px;border-radius:0 0 0 25px;}.fp{width:50px;border-radius:0 0 25px 0;}.fc{font-size:0.6rem;min-height:34px;}
+  #map-container{height:200px;}#star-map-container{height:185px;}
+  .sysg{grid-template-columns:1fr 1fr 1fr;}
 }
 
 /* ANIMATIONS */
@@ -229,7 +379,7 @@ canvas{display:block;}
 <div class="lh">
   <div class="he"></div><div class="hg"></div>
   <div class="hb">
-    <div class="ht">ESPINOSA // CMD</div>
+    <div class="ht">LRE // CMD</div>
     <div class="hr"><div class="hs">STARDATE <span id="sd"></span></div><div class="hs" id="lt"></div></div>
   </div>
   <div class="hp"></div>
@@ -244,29 +394,34 @@ canvas{display:block;}
   <div class="ms" id="seg-night"><div class="md" style="background:#6633AA"></div><span>NIGHT</span></div>
   <div id="sp-w"><div id="sp" style="width:0%"></div></div>
   <div id="sl">☀ 07:09 ☽ 19:42</div>
-  <div id="wx-mini"><span class="wx-icon">⛅</span><span id="wx-mini-val">78°F · PARTLY SUNNY · 69% HUM</span></div>
+  <div id="wx-mini"><span>⛅</span><span id="wx-mini-val">LOADING WX...</span></div>
 </div>
 
-<!-- NAV -->
+<!-- NAV DROPDOWN -->
 <div class="ln">
   <div class="nf"></div><div class="ng"></div>
-  <div class="nb">
-    <button class="nt nh active" onclick="P('home')">HOME</button>
-    <button class="nt nsc" onclick="P('schedule')">SCHED</button>
-    <button class="nt ngig" onclick="P('gigs')">GIGS</button>
-    <button class="nt ntsk" onclick="P('tasks')">TASKS</button>
-    <button class="nt nid" onclick="P('ideas')">IDEAS</button>
-    <button class="nt nsys" onclick="P('system')">SYS</button>
-    <button class="nt nwx" onclick="P('weather')">WX</button>
-    <button class="nt nmp" onclick="P('map')">MAP</button>
-    <button class="nt nst" onclick="P('stars')">STARS</button>
-    <button class="nt" style="background:#003322" onclick="P('deploy')">DEPLOY</button>
+  <div class="nb" style="align-items:center;padding:0 10px;gap:10px;">
+    <div id="nav-active-label" style="font-size:1rem;font-weight:800;letter-spacing:0.18em;color:#fff;text-transform:uppercase;flex:1;">HOME</div>
+    <div style="position:relative;">
+      <button id="nav-dropdown-btn" onclick="toggleNavMenu()" style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.35);color:#fff;font-family:'Antonio',sans-serif;font-size:0.78rem;font-weight:800;letter-spacing:0.15em;padding:6px 14px;cursor:pointer;text-transform:uppercase;display:flex;align-items:center;gap:8px;min-height:34px;">MENU ▾</button>
+      <div id="nav-menu" style="display:none;position:absolute;top:100%;right:0;background:#0a0500;border:1px solid var(--p);z-index:9999;min-width:180px;box-shadow:0 8px 32px rgba(0,0,0,0.8);">
+        <button class="nav-item nh" onclick="P('home');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-home"/></svg>HOME</button>
+        <button class="nav-item nsc" onclick="P('schedule');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-cal"/></svg>SCHEDULE</button>
+        <button class="nav-item ngig" onclick="P('gigs');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-video"/></svg>GIGS</button>
+        <button class="nav-item ntsk" onclick="P('tasks');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-check"/></svg>TASKS</button>
+        <button class="nav-item nid" onclick="P('ideas');toggleNavMenu()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg> IDEAS</button>
+        <button class="nav-item nsys" onclick="P('system');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-gear"/></svg>SYSTEM</button>
+        <button class="nav-item nwx" onclick="P('weather');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-wx-cloud"/></svg>WEATHER</button>
+        <button class="nav-item nmp" onclick="P('map');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-map"/></svg>MAP</button>
+        <button class="nav-item nst" onclick="P('stars');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-stars"/></svg>STARS</button>
+      </div>
+    </div>
   </div>
   <div class="ne"></div>
 </div>
 
 <!-- BODY -->
-<div class="lbd">
+<div class="lb">
   <div class="lsb">
     <div class="sb s1" onclick="P('schedule')">SCHED</div>
     <div class="sb s2 sm"></div>
@@ -279,11 +434,10 @@ canvas{display:block;}
     <div class="sb s6" onclick="P('weather')">WX</div>
     <div class="ssp"></div>
     <div class="sdots">
-      <div class="dr"><span class="dl">API</span><div class="dot dwn"></div></div>
+      <div class="dr"><span class="dl">API</span><div class="dot dwn" id="dot-api"></div></div>
+      <div class="dr"><span class="dl">CAL</span><div class="dot dof" id="dot-cal"></div></div>
+      <div class="dr"><span class="dl">WX</span><div class="dot dof" id="dot-wx"></div></div>
       <div class="dr"><span class="dl">PI</span><div class="dot dof"></div></div>
-      <div class="dr"><span class="dl">SD</span><div class="dot dof"></div></div>
-      <div class="dr"><span class="dl">CAL</span><div class="dot don"></div></div>
-      <div class="dr"><span class="dl">WX</span><div class="dot don" id="wx-dot"></div></div>
     </div>
   </div>
   <div class="lg"></div>
@@ -292,140 +446,114 @@ canvas{display:block;}
 
     <!-- HOME -->
     <div id="page-home" class="page active">
-
-      <!-- CLAUDE CHAT BAR -->
-      <div class="pn" style="border-left-color:var(--g);">
+      <!-- CLAUDE CHAT -->
+      <div class="pn" style="border-left-color:var(--g)">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-          <div class="phl" style="color:var(--g);opacity:1;font-size:0.6rem;letter-spacing:0.18em;">◈ CLAUDE — LCARS COMMAND INTERFACE</div>
+          <div class="phl" style="color:var(--g);opacity:1;font-size:0.62rem;letter-spacing:0.18em;">◈ CLAUDE — LCARS COMMAND</div>
           <div id="claude-turns" style="margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.46rem;color:var(--dim);"></div>
-          <button onclick="clearClaude()" style="background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.2);color:var(--dim);font-family:'Antonio',sans-serif;font-size:0.46rem;font-weight:700;letter-spacing:0.1em;padding:2px 7px;cursor:pointer;text-transform:uppercase;">CLR</button>
+          <button onclick="clearClaude()" style="background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.2);color:var(--dim);font-family:'Antonio',sans-serif;font-size:0.5rem;font-weight:700;letter-spacing:0.1em;padding:4px 10px;cursor:pointer;text-transform:uppercase;min-height:28px;">CLR</button>
         </div>
-        <!-- Conversation history -->
-        <div id="claude-history" style="max-height:140px;overflow-y:auto;margin-bottom:8px;display:none;border:1px solid rgba(0,255,136,0.1);padding:6px 8px;"></div>
-        <!-- Auto briefing -->
-        <div id="claude-briefing" style="margin-bottom:8px;font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--g);line-height:1.7;letter-spacing:0.03em;border-left:2px solid rgba(0,255,136,0.3);padding-left:8px;display:none;"></div>
-        <div style="display:flex;gap:6px;align-items:center;">
-          <input id="claude-input" type="text" placeholder="ENTER COMMAND..." style="flex:1;background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.3);color:var(--g);font-family:'Antonio',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.08em;padding:8px 12px;outline:none;text-transform:uppercase;" onkeydown="if(event.key==='Enter')sendToClaude()"/>
-          <button onclick="sendToClaude()" style="background:var(--g);color:#000;border:none;font-family:'Antonio',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.12em;padding:8px 14px;cursor:pointer;text-transform:uppercase;">SEND</button>
+        <div id="claude-brief" class="claude-brief"></div>
+        <div id="claude-hist" class="claude-hist"></div>
+        <div class="claude-input-row">
+          <input id="claude-input" class="claude-inp" type="text" placeholder="ENTER COMMAND..." autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" onkeydown="if(event.key==='Enter')sendToClaude()"/>
+          <button class="claude-send" onclick="sendToClaude()">SEND</button>
         </div>
-        <div id="claude-loading" style="margin-top:6px;font-family:'Share Tech Mono',monospace;font-size:0.52rem;color:var(--dim);display:none;animation:bl 0.8s step-end infinite;">▋ PROCESSING...</div>
+        <div id="claude-load" class="claude-load">▋ PROCESSING...</div>
       </div>
+
+      <!-- SCHEDULE - LIVE CALENDAR -->
       <div class="pn">
         <div class="ph" onclick="P('schedule')">
           <div class="phl" style="color:var(--g)">Today's Schedule</div>
-          <div class="pid">SYS-4401</div><div class="pha" style="color:var(--g)">▶</div>
+          <div id="cal-status" style="margin-left:auto;font-family:'Share Tech Mono',monospace;font-size:0.52rem;color:rgba(255,255,255,0.5);">LOADING...</div>
+          <div class="pha" style="color:var(--g);margin-left:6px;">▶</div>
         </div>
-        <div class="si"><div class="stm">06:45</div><div class="sbar san"></div><div class="sin"><div class="sti">School Drop-off 🎒</div><div class="ssu">DEPART 06:45 // DUE 07:15</div></div></div>
-        <div class="si"><div class="stm">08:00</div><div class="sbar snw"></div><div class="sin"><div class="sti">Daily Briefing + Deep Work<span class="nbadge">NOW</span></div><div class="ssu">PROTECTED // NO MEETINGS</div></div></div>
-        <div class="si"><div class="stm">09:00</div><div class="sbar swk"></div><div class="sin"><div class="sti">Video Engineer — 1 Hotel SoBe</div><div class="ssu">MPM BIOIMPACT 2026</div></div></div>
-        <div class="si"><div class="stm">13:00</div><div class="sbar sps"></div><div class="sin"><div class="sti">Meeting — Thomas</div><div class="ssu">SYSTEMS & SOPs // THU APR 9</div></div></div>
-        <div class="si"><div class="stm">19:30</div><div class="sbar san"></div><div class="sin"><div class="sti">Kids Bedtime 🌙</div><div class="ssu">PROTECTED ANCHOR</div></div></div>
-        <div class="si"><div class="stm">22:00</div><div class="sbar sps"></div><div class="sin"><div class="sti">Workout 💪</div><div class="ssu">24HR GYM // MON WED FRI</div></div></div>
+        <!-- DAY PROGRESS TRACKER -->
+        <div id="day-tracker" style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.52rem;color:rgba(255,255,255,0.5);font-weight:700;">DAY PROGRESS</span>
+            <span id="tracker-pct" style="font-family:'Share Tech Mono',monospace;font-size:0.52rem;color:var(--g);font-weight:800;">0%</span>
+          </div>
+          <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;position:relative;">
+            <div id="tracker-bar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--g),var(--p));border-radius:3px;transition:width 60s linear;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:3px;">
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.46rem;color:rgba(255,255,255,0.35);">06:00</span>
+            <span id="tracker-now" style="font-family:'Share Tech Mono',monospace;font-size:0.46rem;color:var(--g);font-weight:800;">NOW</span>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:0.46rem;color:rgba(255,255,255,0.35);">23:00</span>
+          </div>
+        </div>
+        <div id="today-schedule">
+          <div class="ssu" style="padding:8px 0;color:rgba(255,255,255,0.4);">◈ CONNECTING TO CALENDAR FEEDS...</div>
+        </div>
       </div>
 
-      <!-- WEATHER MINI PANEL on home -->
+      <!-- WX MINI -->
       <div class="pn pwx">
         <div class="ph" onclick="P('weather')">
           <div class="phl" style="color:#4499FF">Weather — Coral Springs</div>
           <div class="pid">SYS-4408</div><div class="pha" style="color:#4499FF">▶</div>
         </div>
         <div style="display:flex;align-items:center;gap:14px;">
-          <div style="font-size:2rem;font-weight:700;color:var(--p)">78<span style="font-size:1rem;color:var(--dim)">°F</span></div>
-          <div><div style="font-size:0.75rem;font-weight:700;color:var(--s);letter-spacing:0.06em;">PARTLY SUNNY</div><div style="font-family:'Share Tech Mono',monospace;font-size:0.5rem;color:var(--dim);margin-top:2px;">HI 84° · LO 67° · HUM 69% · WIND ESE 10mph</div></div>
-          <div style="margin-left:auto;font-size:1.8rem;">⛅</div>
+          <div style="font-size:2.2rem;font-weight:700;color:var(--p)" id="wx-temp-home">--<span style="font-size:0.9rem;color:rgba(255,255,255,0.5)">°F</span></div>
+          <div><div style="font-size:0.85rem;font-weight:700;color:#fff;letter-spacing:0.06em;" id="wx-cond-home">--</div><div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.5);margin-top:2px;" id="wx-sub-home">HI --° · LO --° · --% HUM</div></div>
+          <div style="margin-left:auto;font-size:1.8rem;" id="wx-icon-home"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-wx-temp"/></svg></div>
         </div>
       </div>
 
+      <!-- GIGS -->
       <div class="pn pr">
         <div class="ph" onclick="P('gigs')">
           <div class="phl" style="color:var(--a1)">Active Gigs</div>
           <div class="pid">SYS-4402</div><div class="pha" style="color:var(--a1)">▶</div>
         </div>
-        <div class="gc"><div class="gst stc">CONFIRMED // TODAY</div><div class="gti">MPM BIOIMPACT 2026</div><div class="gme">📍 1 Hotel South Beach · APR 06 // 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER</div></div>
-        <div class="gc"><div class="gst stu">UPCOMING // APR 10</div><div class="gti">SELFLESS LOVE GALA</div><div class="gme">📍 Mar-a-Lago Club, Palm Beach · APR 10 // 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER</div></div>
+        <div class="gc"><div class="gst stc">CONFIRMED // APR 6 MON</div><div class="gti">MPM BIOIMPACT 2026</div><div class="gme"><svg class="ico" width="12" height="12" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-loc"/></svg> 1 Hotel South Beach · 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER</div></div>
+        <div class="gc"><div class="gst stu">UPCOMING // APR 10 FRI</div><div class="gti">SELFLESS LOVE GALA</div><div class="gme"><svg class="ico" width="12" height="12" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-loc"/></svg> Mar-a-Lago Club, Palm Beach · 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER</div></div>
       </div>
 
+      <!-- TASKS -->
       <div class="pn ppu">
         <div class="ph" onclick="P('tasks')">
           <div class="phl" style="color:var(--a2)">Task Queue</div>
           <div class="pid">SYS-4403</div><div class="pha" style="color:var(--a2)">▶</div>
         </div>
-        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Sync API key to desktop</div><div class="tpr thi">HIGH</div></div>
-        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Gig prep — MPM Bioimpact</div><div class="tpr thi">HIGH</div></div>
+        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">API Phase 2 — local dev + first script</div><div class="tpr thi">HIGH</div></div>
+        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Gig prep — MPM Bioimpact APR 6</div><div class="tpr thi">HIGH</div></div>
         <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Weekly Review — Friday 3pm</div><div class="tpr">MED</div></div>
         <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">SOPs — capture gig workflow</div><div class="tpr">MED</div></div>
       </div>
 
+      <!-- NUGGETS -->
       <div class="pn pli">
         <div class="ph" onclick="P('ideas')">
           <div class="phl" style="color:var(--a3)">Ideas & Nuggets</div>
           <div class="pid">SYS-4404</div><div class="pha" style="color:var(--a3)">▶</div>
         </div>
-        <div class="ni"><div class="nico">💡</div><div class="ntx">LCARS as main personal OS</div><div class="nts">TODAY</div></div>
-        <div class="ni"><div class="nico">💡</div><div class="ntx">Stream Deck as Claude command surface</div><div class="nts">TODAY</div></div>
-        <div class="ni"><div class="nico">💡</div><div class="ntx">Circadian LCARS theme engine</div><div class="nts">TODAY</div></div>
-        <div class="ni"><div class="nico">💡</div><div class="ntx">Weather + go-live deployment</div><div class="nts">TODAY</div></div>
-      </div>
-    </div>
-
-    <!-- WEATHER PAGE -->
-    <div id="page-weather" class="page">
-      <div class="dh pwx" onclick="P('home')"><div class="bk" style="color:#4499FF;border-color:rgba(34,85,170,0.3)">◀ BACK</div><div class="dtit" style="color:#4499FF">WEATHER — CORAL SPRINGS FL</div><div class="pid">SYS-4408</div></div>
-      <div class="pn pwx">
-        <div class="phl" style="color:#4499FF;opacity:1;margin-bottom:10px;font-size:0.56rem;letter-spacing:0.18em;">CURRENT CONDITIONS</div>
-        <div class="wx-hero">
-          <div class="wx-icon-big" id="wx-icon-big">⛅</div>
-          <div>
-            <div class="wx-temp"><span id="wx-tempF">78</span><span class="wx-unit">°F</span></div>
-            <div style="font-family:'Share Tech Mono',monospace;font-size:0.48rem;color:var(--dim);margin-top:2px;">FEELS LIKE <span id="wx-feels">78</span>°F</div>
-          </div>
-          <div class="wx-desc">
-            <div class="wx-cond" id="wx-cond">PARTLY SUNNY</div>
-            <div class="wx-loc">CORAL SPRINGS, FL 33071<br>26.256°N · 80.250°W</div>
-          </div>
-        </div>
-        <div class="wx-grid">
-          <div class="wx-cell"><div class="wx-cn">Humidity</div><div class="wx-cv" id="wx-hum">69%</div></div>
-          <div class="wx-cell"><div class="wx-cn">Wind</div><div class="wx-cv" id="wx-wind">ESE 10mph</div></div>
-          <div class="wx-cell"><div class="wx-cn">UV Index</div><div class="wx-cv" id="wx-uv">HIGH</div></div>
-          <div class="wx-cell"><div class="wx-cn">Pressure</div><div class="wx-cv" id="wx-pres">30.08"</div></div>
-          <div class="wx-cell"><div class="wx-cn">Visibility</div><div class="wx-cv" id="wx-vis">10 mi</div></div>
-          <div class="wx-cell"><div class="wx-cn">Dew Point</div><div class="wx-cv" id="wx-dew">62°F</div></div>
-        </div>
-        <div class="wx-status" id="wx-status">● LIVE DATA VIA OPEN-METEO API · UPDATES EVERY 15 MIN</div>
-      </div>
-      <div class="pn pwx">
-        <div class="phl" style="color:#4499FF;opacity:1;margin-bottom:8px;font-size:0.56rem;letter-spacing:0.18em;">TODAY'S RANGE</div>
-        <div class="wx-bar">
-          <div class="wx-bar-label">TEMPERATURE TREND (°F)</div>
-          <div id="wx-hourly-bars"></div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px;">
-          <div class="wx-cell"><div class="wx-cn">Today High</div><div class="wx-cv" id="wx-hi">84°F</div></div>
-          <div class="wx-cell"><div class="wx-cn">Today Low</div><div class="wx-cv" id="wx-lo">67°F</div></div>
-          <div class="wx-cell"><div class="wx-cn">Sunrise</div><div class="wx-cv">7:09 AM</div></div>
-          <div class="wx-cell"><div class="wx-cn">Sunset</div><div class="wx-cv">7:42 PM</div></div>
-        </div>
-      </div>
-      <div class="pn pwx">
-        <div class="phl" style="color:#4499FF;opacity:1;margin-bottom:8px;font-size:0.56rem;letter-spacing:0.18em;">GIG WEATHER ALERTS</div>
-        <div class="si"><div class="stm" style="color:var(--a1);min-width:52px">APR 06</div><div class="sbar swk"></div><div class="sin"><div class="sti">1 Hotel South Beach</div><div class="ssu" id="gig1-wx">SUNNY · HI 84°F · GOOD CONDITIONS FOR GIG</div></div></div>
-        <div class="si"><div class="stm" style="color:var(--p);min-width:52px">APR 10</div><div class="sbar san"></div><div class="sin"><div class="sti">Mar-a-Lago Club, Palm Beach</div><div class="ssu" id="gig2-wx">PARTLY CLOUDY · HI 82°F · CHECKING FORECAST...</div></div></div>
+        <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">LCARS as main personal OS</div><div class="nts">TODAY</div></div>
+        <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">Stream Deck as Claude command surface</div><div class="nts">TODAY</div></div>
+        <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">Pi as always-on control brain</div><div class="nts">TODAY</div></div>
+        <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">Circadian theme engine built + live</div><div class="nts">TODAY</div></div>
       </div>
     </div>
 
     <!-- SCHEDULE PAGE -->
     <div id="page-schedule" class="page">
-      <div class="dh pgr" onclick="P('home')"><div class="bk" style="color:var(--g);border-color:rgba(0,255,136,0.3)">◀ BACK</div><div class="dtit" style="color:var(--g)">SCHEDULE — FULL VIEW</div><div class="pid">SYS-4401</div></div>
+      <div class="dh pgr" onclick="P('home')"><div class="bk" style="color:var(--g);border-color:rgba(0,255,136,0.3)">◀ BACK</div><div class="dtit" style="color:var(--g)">SCHEDULE</div><div class="pid">SYS-4401</div></div>
+      <!-- Live Calendar Feed -->
       <div class="pn pgr">
-        <div class="phl" style="color:var(--g);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">WEEKDAY STRUCTURE</div>
-        <div class="si"><div class="stm">06:45</div><div class="sbar san"></div><div class="sin"><div class="sti">School Drop-off 🎒</div><div class="ssu">DAILY MON–FRI // DUE 07:15</div></div></div>
+        <div class="phl" style="color:var(--g);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">◈ LIVE CALENDAR FEED</div>
+        <div id="live-cal-events"><div class="ssu" style="padding:6px 0;color:var(--dim);">CONNECTING TO CALENDAR FEEDS...</div></div>
+      </div>
+      <div class="pn pgr">
+        <div class="phl" style="color:var(--g);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">RECURRING STRUCTURE</div>
+        <div class="si"><div class="stm">06:45</div><div class="sbar san"></div><div class="sin"><div class="sti">School Drop-off <svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-delta"/></svg></div><div class="ssu">DAILY MON–FRI</div></div></div>
         <div class="si"><div class="stm">08:00</div><div class="sbar" style="background:var(--p)"></div><div class="sin"><div class="sti">Morning Buffer + Daily Check-in</div><div class="ssu">PROTECTED — NO MEETINGS</div></div></div>
         <div class="si"><div class="stm">09:00</div><div class="sbar" style="background:var(--p)"></div><div class="sin"><div class="sti">Deep Work Block</div><div class="ssu">MON–THU // 09:00–12:00</div></div></div>
-        <div class="si"><div class="stm">15:00</div><div class="sbar sps"></div><div class="sin"><div class="sti">Weekly Review 📊</div><div class="ssu">FRIDAY ONLY</div></div></div>
-        <div class="si"><div class="stm">19:30</div><div class="sbar san"></div><div class="sin"><div class="sti">Kids Bedtime 🌙</div><div class="ssu">PROTECTED ANCHOR</div></div></div>
-        <div class="si"><div class="stm">20:00</div><div class="sbar sps"></div><div class="sin"><div class="sti">Partner Time 🏠</div><div class="ssu">20:00–22:00</div></div></div>
-        <div class="si"><div class="stm">22:00</div><div class="sbar" style="background:#4488FF"></div><div class="sin"><div class="sti">Workout 💪</div><div class="ssu">MON WED FRI // 24HR GYM</div></div></div>
+        <div class="si"><div class="stm">15:00</div><div class="sbar sps"></div><div class="sin"><div class="sti">Weekly Review <svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-chart"/></svg></div><div class="ssu">FRIDAY ONLY</div></div></div>
+        <div class="si"><div class="stm">19:30</div><div class="sbar san"></div><div class="sin"><div class="sti">Kids Bedtime <svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-moon"/></svg></div><div class="ssu">PROTECTED ANCHOR</div></div></div>
+        <div class="si"><div class="stm">20:00</div><div class="sbar sps"></div><div class="sin"><div class="sti">Partner Time <svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-home"/></svg></div><div class="ssu">20:00–22:00</div></div></div>
+        <div class="si"><div class="stm">22:00</div><div class="sbar" style="background:#4488FF"></div><div class="sin"><div class="sti">Workout <svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-workout"/></svg></div><div class="ssu">MON WED FRI // 24HR GYM</div></div></div>
       </div>
     </div>
 
@@ -434,8 +562,8 @@ canvas{display:block;}
       <div class="dh pr" onclick="P('home')"><div class="bk" style="color:var(--a1);border-color:rgba(204,68,68,0.3)">◀ BACK</div><div class="dtit" style="color:var(--a1)">GIGS & WORK</div><div class="pid">SYS-4402</div></div>
       <div class="pn pr">
         <div class="phl" style="color:var(--a1);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">ACTIVE ASSIGNMENTS</div>
-        <div class="gc"><div class="gst stc">CONFIRMED // TODAY</div><div class="gti">MPM BIOIMPACT 2026</div><div class="gme">JOB# CO445054116 — CORINTHIAN EVENTS<br>📍 1 Hotel South Beach, 2341 Collins Ave, Miami Beach FL<br>📅 APR 06 // 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER 01SU</div></div>
-        <div class="gc"><div class="gst stu">UPCOMING // APR 10</div><div class="gti">SELFLESS LOVE GALA</div><div class="gme">JOB# CO434693835<br>📍 Mar-a-Lago Club, 1100 S. Ocean Blvd, Palm Beach FL<br>📅 APR 10 // 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER 02SU</div></div>
+        <div class="gc"><div class="gst stc">CONFIRMED // MON APR 6</div><div class="gti">MPM BIOIMPACT 2026</div><div class="gme">JOB# CO445054116 — CORINTHIAN EVENTS<br><svg class="ico" width="12" height="12" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-loc"/></svg> 1 Hotel South Beach, 2341 Collins Ave, Miami Beach FL<br>📅 APR 06 // 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER 01SU</div></div>
+        <div class="gc"><div class="gst stu">UPCOMING // FRI APR 10</div><div class="gti">SELFLESS LOVE GALA</div><div class="gme">JOB# CO434693835<br><svg class="ico" width="12" height="12" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-loc"/></svg> Mar-a-Lago Club, 1100 S. Ocean Blvd, Palm Beach FL<br>📅 APR 10 // 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER 02SU</div></div>
       </div>
       <div class="pn pr">
         <div class="phl" style="color:var(--a1);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">GIG PREP CHECKLIST</div>
@@ -452,16 +580,21 @@ canvas{display:block;}
       <div class="dh ppu" onclick="P('home')"><div class="bk" style="color:var(--a2);border-color:rgba(153,153,204,0.3)">◀ BACK</div><div class="dtit" style="color:var(--a2)">TASK QUEUE</div><div class="pid">SYS-4403</div></div>
       <div class="pn ppu">
         <div class="phl" style="color:var(--a2);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">HIGH PRIORITY</div>
-        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Sync Claude API key to desktop</div><div class="tpr thi">HIGH</div></div>
-        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Gig prep — MPM Bioimpact (TODAY)</div><div class="tpr thi">HIGH</div></div>
         <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">API Phase 2 — local dev environment</div><div class="tpr thi">HIGH</div></div>
+        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Gig prep — MPM Bioimpact APR 6</div><div class="tpr thi">HIGH</div></div>
+        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Add remaining iCal URLs to LCARS</div><div class="tpr thi">HIGH</div></div>
       </div>
       <div class="pn ppu">
         <div class="phl" style="color:var(--a2);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">THIS WEEK</div>
         <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Weekly Review — Friday 3pm</div><div class="tpr">MED</div></div>
         <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">SOPs — document gig workflow</div><div class="tpr">MED</div></div>
-        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Selfless Love Gala prep</div><div class="tpr">MED</div></div>
+        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Selfless Love Gala prep APR 10</div><div class="tpr">MED</div></div>
         <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Monday.com integration blueprint</div><div class="tpr">MED</div></div>
+      </div>
+      <div class="pn ppu">
+        <div class="phl" style="color:var(--a2);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">BUILDS</div>
+        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Raspberry Pi — spec + order</div><div class="tpr">LOW</div></div>
+        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Stream Deck button layout</div><div class="tpr">LOW</div></div>
       </div>
     </div>
 
@@ -473,14 +606,15 @@ canvas{display:block;}
         <div class="ni"><div class="nico">🚀</div><div class="ntx">LCARS as main personal OS</div><div class="nts">APR 4</div></div>
         <div class="ni"><div class="nico">🖥️</div><div class="ntx">Claude API + Pi = always-on brain</div><div class="nts">APR 4</div></div>
         <div class="ni"><div class="nico">🎮</div><div class="ntx">Stream Deck = physical Claude surface</div><div class="nts">APR 4</div></div>
-        <div class="ni"><div class="nico">🎨</div><div class="ntx">Circadian theme — sunrise/sunset aware</div><div class="nts">APR 4</div></div>
-        <div class="ni"><div class="nico">🌤️</div><div class="ntx">Live weather + gig weather alerts</div><div class="nts">APR 4</div></div>
+        <div class="ni"><div class="nico">🎨</div><div class="ntx">Circadian theme engine — sunrise/sunset aware</div><div class="nts">APR 4</div></div>
+        <div class="ni"><div class="nico">📱</div><div class="ntx">AirPlay LCARS to Apple TV — ambient display</div><div class="nts">APR 4</div></div>
+        <div class="ni"><div class="nico">⌚</div><div class="ntx">Apple Watch voice → Claude via Shortcuts</div><div class="nts">APR 4</div></div>
       </div>
       <div class="pn pli">
         <div class="phl" style="color:var(--a3);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">INTEGRATIONS</div>
         <div class="ni"><div class="nico">📋</div><div class="ntx">Monday.com ↔ Claude API bridge</div><div class="nts">APR 4</div></div>
         <div class="ni"><div class="nico">📧</div><div class="ntx">GSuite deep integration — post API</div><div class="nts">APR 4</div></div>
-        <div class="ni"><div class="nico">📱</div><div class="ntx">Chat as dev env + app as daily assistant</div><div class="nts">APR 4</div></div>
+        <div class="ni"><div class="nico">📅</div><div class="ntx">Multi-calendar iCal feed — live in LCARS</div><div class="nts">APR 4</div></div>
       </div>
     </div>
 
@@ -490,78 +624,51 @@ canvas{display:block;}
       <div class="pn pta">
         <div class="phl" style="color:var(--a4);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">LIVE CONNECTIONS</div>
         <div class="sysg">
-          <div class="sysn"><div class="snn">Calendar</div><div class="sns son">ONLINE</div><div class="sbw"><div class="sbr bg" style="width:100%"></div></div><div class="snv">ALL FEEDS SYNCED</div></div>
-          <div class="sysn"><div class="snn">Reminders</div><div class="sns son">ONLINE</div><div class="sbw"><div class="sbr bg" style="width:100%"></div></div><div class="snv">ICLOUD SYNCED</div></div>
-          <div class="sysn"><div class="snn">Weather API</div><div class="sns son" id="wx-sys-status">ONLINE</div><div class="sbw"><div class="sbr bg" style="width:100%"></div></div><div class="snv">OPEN-METEO // FREE</div></div>
-          <div class="sysn"><div class="snn">Claude API</div><div class="sns swn">STANDBY</div><div class="sbw"><div class="sbr by" style="width:40%"></div></div><div class="snv">KEY READY</div></div>
-          <div class="sysn"><div class="snn">Raspberry Pi</div><div class="sns sof">OFFLINE</div><div class="sbw"><div class="sbr brr" style="width:0%"></div></div><div class="snv">NOT CONFIG</div></div>
-          <div class="sysn"><div class="snn">Monday.com</div><div class="sns sof">OFFLINE</div><div class="sbw"><div class="sbr brr" style="width:0%"></div></div><div class="snv">API PENDING</div></div>
+          <div class="sysn"><div class="snn">Claude API</div><div class="sns son">ONLINE</div><div class="sbw"><div class="sbr bg" style="width:100%"></div></div><div class="snv">RENDER // LIVE</div></div>
+          <div class="sysn"><div class="snn">Calendar</div><div class="sns son">ONLINE</div><div class="sbw"><div class="sbr bg" style="width:100%"></div></div><div class="snv">2 FEEDS ACTIVE</div></div>
+          <div class="sysn"><div class="snn">Weather</div><div class="sns son">ONLINE</div><div class="sbw"><div class="sbr bg" style="width:100%"></div></div><div class="snv">OPEN-METEO</div></div>
+          <div class="sysn"><div class="snn">GitHub Pages</div><div class="sns son">ONLINE</div><div class="sbw"><div class="sbr bg" style="width:100%"></div></div><div class="snv">LCARS LIVE</div></div>
+          <div class="sysn"><div class="snn">Raspberry Pi</div><div class="sns sof">OFFLINE</div><div class="sbw"><div class="sbr brr" style="width:0%"></div></div><div class="snv">PHASE 4</div></div>
+          <div class="sysn"><div class="snn">Stream Deck</div><div class="sns sof">OFFLINE</div><div class="sbw"><div class="sbr brr" style="width:0%"></div></div><div class="snv">PHASE 5</div></div>
+        </div>
+      </div>
+      <div class="pn pta">
+        <div class="phl" style="color:var(--a4);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">BUILD PHASES</div>
+        <div class="sysg" style="grid-template-columns:1fr;">
+          <div class="sysn" style="margin-bottom:5px;"><div class="snn">PHASE 1 — API Key</div><div class="sns son">COMPLETE</div><div class="sbw"><div class="sbr bg" style="width:100%"></div></div><div class="snv">KEY LIVE ON RENDER</div></div>
+          <div class="sysn" style="margin-bottom:5px;"><div class="snn">PHASE 2 — Backend Server</div><div class="sns son">COMPLETE</div><div class="sbw"><div class="sbr bg" style="width:100%"></div></div><div class="snv">lcars-api.onrender.com</div></div>
+          <div class="sysn" style="margin-bottom:5px;"><div class="snn">PHASE 3 — LCARS Interface</div><div class="sns son">COMPLETE</div><div class="sbw"><div class="sbr bg" style="width:100%"></div></div><div class="snv">GITHUB PAGES LIVE</div></div>
+          <div class="sysn" style="margin-bottom:5px;"><div class="snn">PHASE 4 — Raspberry Pi</div><div class="sns sof">PENDING</div><div class="sbw"><div class="sbr brr" style="width:0%"></div></div><div class="snv">24/7 ALWAYS-ON</div></div>
+          <div class="sysn" style="margin-bottom:5px;"><div class="snn">PHASE 5 — Stream Deck</div><div class="sns sof">PENDING</div><div class="sbw"><div class="sbr brr" style="width:0%"></div></div><div class="snv">PHYSICAL COMMAND SURFACE</div></div>
+          <div class="sysn"><div class="snn">PHASE 6 — Full Live LCARS</div><div class="sns sof">PENDING</div><div class="sbw"><div class="sbr brr" style="width:0%"></div></div><div class="snv">THE PAYOFF</div></div>
         </div>
       </div>
     </div>
 
-    <!-- DEPLOY PAGE -->
-    <div id="page-deploy" class="page">
-      <div class="dh pgr" onclick="P('home')" style="border-left-color:var(--g)"><div class="bk" style="color:var(--g);border-color:rgba(0,255,136,0.3)">◀ BACK</div><div class="dtit" style="color:var(--g)">GO LIVE — DEPLOYMENT GUIDE</div><div class="pid">SYS-DEPLOY</div></div>
-
-      <div class="pn pgr">
-        <div class="phl" style="color:var(--g);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">PHASE 0 — RIGHT NOW (NO API NEEDED)</div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">01</span><span class="ds-title">Save this file locally</span><span class="ds-status dst-ready">READY NOW</span></div>
-          <div class="ds-body">Download lcars-v4.html to your Mac. Open in any browser — Chrome or Safari. Works 100% offline. This is your testbed.<span class="ds-cmd">File → Save As → lcars-v4.html</span></div>
+    <!-- WEATHER PAGE -->
+    <div id="page-weather" class="page">
+      <div class="dh pwx" onclick="P('home')"><div class="bk" style="color:#4499FF;border-color:rgba(34,85,170,0.3)">◀ BACK</div><div class="dtit" style="color:#4499FF">WEATHER</div><div class="pid">SYS-4408</div></div>
+      <div class="pn pwx">
+        <div class="phl" style="color:#4499FF;opacity:1;margin-bottom:10px;font-size:0.56rem;letter-spacing:0.18em;">CURRENT CONDITIONS — CORAL SPRINGS FL</div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div style="font-size:2.8rem;font-weight:700;color:var(--p)" id="wx-tempF">--<span style="font-size:1rem;color:rgba(255,255,255,0.5)">°F</span></div>
+          <div><div style="font-size:0.9rem;font-weight:700;color:#fff;letter-spacing:0.06em;" id="wx-cond">--</div><div style="font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.5);margin-top:2px;">FEELS LIKE <span id="wx-feels">--</span>°F</div></div>
+          <div style="margin-left:auto;font-size:2rem;" id="wx-icon-big"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-wx-temp"/></svg></div>
         </div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">02</span><span class="ds-title">Add to your iPhone home screen</span><span class="ds-status dst-ready">READY NOW</span></div>
-          <div class="ds-body">Open the file in Safari on your iPhone. Tap Share → Add to Home Screen. It becomes a full-screen app with no browser chrome — looks native.<span class="ds-cmd">Safari → Share → Add to Home Screen → LCARS CMD</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;">
+          <div class="wx-cell"><div class="wx-cn">Humidity</div><div class="wx-cv" id="wx-hum">--%</div></div>
+          <div class="wx-cell"><div class="wx-cn">Wind</div><div class="wx-cv" id="wx-wind">--</div></div>
+          <div class="wx-cell"><div class="wx-cn">Today High</div><div class="wx-cv" id="wx-hi">--°F</div></div>
+          <div class="wx-cell"><div class="wx-cn">Today Low</div><div class="wx-cv" id="wx-lo">--°F</div></div>
+          <div class="wx-cell"><div class="wx-cn">UV Index</div><div class="wx-cv" id="wx-uv">--</div></div>
+          <div class="wx-cell"><div class="wx-cn">Visibility</div><div class="wx-cv" id="wx-vis">-- mi</div></div>
         </div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">03</span><span class="ds-title">Host on GitHub Pages (free, live URL)</span><span class="ds-status dst-next">NEXT STEP</span></div>
-          <div class="ds-body">Free hosting. Your LCARS gets a real URL accessible from any device. No server needed yet.<span class="ds-cmd">github.com → New repo → Upload file → Settings → Pages → Deploy</span></div>
-        </div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">04</span><span class="ds-title">Weather API — already live</span><span class="ds-status dst-ready">ACTIVE</span></div>
-          <div class="ds-body">Open-Meteo is free, no API key required. Live weather loads automatically when you open this file from any browser. Already wired in and working.</div>
-        </div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:0.5rem;color:rgba(255,255,255,0.4);margin-top:8px;" id="wx-status">● LOADING...</div>
       </div>
-
-      <div class="pn pgr">
-        <div class="phl" style="color:var(--g);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">PHASE 1 — CLAUDE API (WHEN READY)</div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">05</span><span class="ds-title">Sync API key to Mac</span><span class="ds-status dst-next">NEXT</span></div>
-          <div class="ds-body">You created the key at console.anthropic.com. Now save it locally.<span class="ds-cmd">echo "ANTHROPIC_API_KEY=sk-ant-..." >> ~/.zshrc && source ~/.zshrc</span></div>
-        </div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">06</span><span class="ds-title">Install Node + Anthropic SDK</span><span class="ds-status dst-next">NEXT</span></div>
-          <div class="ds-body">Two commands. Node runs your scripts, the SDK talks to Claude.<span class="ds-cmd">brew install node && npm install @anthropic-ai/sdk</span></div>
-        </div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">07</span><span class="ds-title">First "Hello Claude" script</span><span class="ds-status dst-next">NEXT</span></div>
-          <div class="ds-body">Paste and run this in terminal to confirm everything works. Takes 2 minutes.<span class="ds-cmd">node -e "const A=require('@anthropic-ai/sdk');const c=new A.Anthropic();c.messages.create({model:'claude-sonnet-4-20250514',max_tokens:100,messages:[{role:'user',content:'LCARS online. Confirm.'}]}).then(r=>console.log(r.content[0].text))"</span></div>
-        </div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">08</span><span class="ds-title">Wire Claude into this interface</span><span class="ds-status dst-next">NEXT</span></div>
-          <div class="ds-body">Add a prompt bar to LCARS. Type a command, get a response inline. First real AI-powered panel — briefings, gig summaries, idea expansion.</div>
-        </div>
-      </div>
-
-      <div class="pn pgr">
-        <div class="phl" style="color:var(--g);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">PHASE 2 — PI + STREAM DECK</div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">09</span><span class="ds-title">Raspberry Pi setup</span><span class="ds-status dst-later">LATER</span></div>
-          <div class="ds-body">Flash Pi 4 or 5 with Pi OS. Install Node. Move your Claude script to the Pi. Add a simple Express server — now LCARS can call Claude from any device in your house.</div>
-        </div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">10</span><span class="ds-title">Stream Deck + Companion</span><span class="ds-status dst-later">LATER</span></div>
-          <div class="ds-body">Install Bitfocus Companion on the Pi. Map Stream Deck buttons to Claude prompts. Physical button → AI response → LCARS panel update. This is the command surface.</div>
-        </div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">11</span><span class="ds-title">Monday.com + GSuite bridges</span><span class="ds-status dst-later">LATER</span></div>
-          <div class="ds-body">Once Pi is live, add Monday.com GraphQL API calls and Gmail connector. Daily gig briefing auto-generated. Work status pulled into LCARS automatically.</div>
-        </div>
-        <div class="deploy-step">
-          <div class="ds-header"><span class="ds-num">12</span><span class="ds-title">Full LCARS live — The Payoff</span><span class="ds-status dst-later">PAYOFF</span></div>
-          <div class="ds-body">All data live. Calendar, tasks, gigs, weather, Claude AI, Monday.com, GSuite. Circadian themes. Star map. Voice input via Stream Deck. This is the ship.</div>
-        </div>
+      <div class="pn pwx">
+        <div class="phl" style="color:#4499FF;opacity:1;margin-bottom:8px;font-size:0.56rem;letter-spacing:0.18em;">GIG WEATHER</div>
+        <div class="si"><div class="stm" style="color:var(--a1);min-width:56px">APR 06</div><div class="sbar swk"></div><div class="sin"><div class="sti">1 Hotel South Beach</div><div class="ssu" id="gig1-wx">LOADING...</div></div></div>
+        <div class="si"><div class="stm" style="color:var(--p);min-width:56px">APR 10</div><div class="sbar san"></div><div class="sin"><div class="sti">Mar-a-Lago, Palm Beach</div><div class="ssu" id="gig2-wx">LOADING...</div></div></div>
       </div>
     </div>
 
@@ -577,8 +684,8 @@ canvas{display:block;}
           <div class="mbo" style="color:#4488FF;">LAT 26.2562°N · LON 80.2497°W</div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px;">
-          <div class="sysn"><div class="snn">Location</div><div class="sns son" style="font-size:0.62rem;">CORAL SPRINGS</div><div class="snv">N UNIVERSITY DR, FL 33071</div></div>
-          <div class="sysn"><div class="snn">Nearest Gig</div><div class="sns swn" style="font-size:0.62rem;">26 MI SE</div><div class="snv">1 HOTEL SOUTH BEACH</div></div>
+          <div class="sysn"><div class="snn">Location</div><div class="sns son" style="font-size:0.62rem;">CORAL SPRINGS</div><div class="snv">FL 33071</div></div>
+          <div class="sysn"><div class="snn">Work/Warehouse</div><div class="sns swn" style="font-size:0.62rem;">701 BOUTWELL</div><div class="snv">CORAL SPRINGS</div></div>
         </div>
       </div>
     </div>
@@ -603,7 +710,7 @@ canvas{display:block;}
     </div>
 
   </div><!-- /lc -->
-</div><!-- /lbd -->
+</div><!-- /lb -->
 
 <!-- FOOTER -->
 <div class="lf">
@@ -613,7 +720,6 @@ canvas{display:block;}
     <button class="fc" onclick="P('weather')">WX</button>
     <button class="fc" onclick="P('gigs')">GIGS</button>
     <button class="fc" onclick="P('map')">MAP</button>
-    <button class="fc" onclick="P('deploy')">DEPLOY</button>
     <button class="fc" onclick="P('stars')">STARS</button>
     <div class="ft" id="fclock">--:--</div>
   </div>
@@ -622,109 +728,7 @@ canvas{display:block;}
 
 </div><!-- /app -->
 <script>
-// ═══════════════════ CLAUDE API v2 ═══════════════════
-const API_URL = 'https://lcars-api.onrender.com';
-const SESSION_ID = 'lcars-' + Date.now();
-let chatHistory = [];
-
-async function sendToClaude(){
-  const input = document.getElementById('claude-input');
-  const loading = document.getElementById('claude-loading');
-  const msg = input.value.trim();
-  if(!msg) return;
-  input.value = '';
-
-  // Add user message to UI
-  addToHistory('USER', msg, 'rgba(255,153,0,0.7)');
-  loading.style.display = 'block';
-
-  try {
-    const res = await fetch(`${API_URL}/api/chat`, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ message: msg, sessionId: SESSION_ID, context: 'LCARS Home Dashboard' })
-    });
-    const data = await res.json();
-    loading.style.display = 'none';
-    addToHistory('LCARS', data.response || data.error, 'var(--g)');
-    if(data.turns) {
-      const turns = document.getElementById('claude-turns');
-      if(turns) turns.textContent = `${data.turns} TURNS`;
-    }
-  } catch(e) {
-    loading.style.display = 'none';
-    addToHistory('ERROR', 'Cannot reach LCARS API — ' + e.message, 'var(--a1)');
-  }
-}
-
-function addToHistory(role, text, color){
-  chatHistory.push({role, text});
-  const hist = document.getElementById('claude-history');
-  if(!hist) return;
-  hist.style.display = 'block';
-  // Hide briefing once chat starts
-  const brief = document.getElementById('claude-briefing');
-  if(brief && chatHistory.length > 0) brief.style.display = 'none';
-
-  const entry = document.createElement('div');
-  entry.style.cssText = `margin-bottom:6px;font-family:'Share Tech Mono',monospace;font-size:0.55rem;line-height:1.5;`;
-  entry.innerHTML = `<span style="color:${color};font-weight:700;letter-spacing:0.1em;">${role} ▸ </span><span style="color:rgba(255,255,255,0.75);">${text}</span>`;
-  hist.appendChild(entry);
-  hist.scrollTop = hist.scrollHeight;
-}
-
-async function clearClaude(){
-  chatHistory = [];
-  const hist = document.getElementById('claude-history');
-  if(hist){ hist.innerHTML = ''; hist.style.display = 'none'; }
-  const turns = document.getElementById('claude-turns');
-  if(turns) turns.textContent = '';
-  try {
-    await fetch(`${API_URL}/api/chat/clear`, {
-      method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ sessionId: SESSION_ID })
-    });
-  } catch(e){}
-  // Reload briefing
-  loadBriefing();
-}
-
-async function loadBriefing(){
-  const brief = document.getElementById('claude-briefing');
-  if(!brief) return;
-  try {
-    const res = await fetch(`${API_URL}/api/briefing`);
-    const data = await res.json();
-    if(data.briefing && chatHistory.length === 0){
-      brief.innerHTML = data.briefing.replace(/\n/g,'<br>');
-      brief.style.display = 'block';
-    }
-  } catch(e){ console.log('Briefing offline'); }
-}
-
-// Load Google Calendar iCal feed
-async function loadCalendar(){
-  // To enable: set your Google Calendar public iCal URL here
-  // Get it from: Google Calendar → Settings → [calendar] → Integrate calendar → iCal URL
-  const ICAL_URL = ''; // paste your iCal URL here when ready
-  if(!ICAL_URL) return;
-  try {
-    const res = await fetch(`${API_URL}/api/calendar?url=${encodeURIComponent(ICAL_URL)}`);
-    const data = await res.json();
-    if(data.events && data.events.length > 0) renderCalendarEvents(data.events);
-  } catch(e){ console.log('Calendar feed offline'); }
-}
-
-function renderCalendarEvents(events){
-  const container = document.querySelector('#page-schedule .pn.pgr .phl + div') || 
-                    document.getElementById('live-calendar-events');
-  if(!container) return;
-  // Future: inject live events into schedule panels
-  console.log('Live calendar events:', events.length);
-}
-
-loadBriefing();
-loadCalendar();
+// ═══ THEME ENGINE ═══
 const SR=7+9/60,SS=19+42/60;
 const TH={
   classic:{p:'#FF9900',s:'#FFCC99',a1:'#CC4444',a2:'#9999CC',a3:'#CCAAFF',a4:'#FFCC66',bg:'#000000',bg2:'#0a0500',dim:'#553300',name:'CLASSIC // DAY'},
@@ -736,27 +740,24 @@ function hx(c){return[parseInt(c.slice(1,3),16),parseInt(c.slice(3,5),16),parseI
 function rx(r,g,b){return'#'+[r,g,b].map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');}
 function lc(a,b,t){const[r1,g1,b1]=hx(a),[r2,g2,b2]=hx(b);return rx(r1+(r2-r1)*t,g1+(g2-g1)*t,b1+(b2-b1)*t);}
 function lt(A,B,t){const k=['p','s','a1','a2','a3','a4','bg','bg2','dim'];const o={};k.forEach(k=>o[k]=lc(A[k],B[k],t));return o;}
-
 function getTheme(h){
   const dd=SR-.5,de=SR+1.5,ts=SR+2,tp=(SR+SS)/2,te=SS-1.5,ds=SS-1,dend=SS+.5,ns=SS+1,np=23.5,pd=SR-1.5;
   let th,badge;
   if(h<pd){th=TH.night;badge=TH.night.name;}
-  else if(h<dd){const t=(h-pd)/(dd-pd);th=lt(TH.night,TH.classic,t);badge='PRE-DAWN SHIFT';}
+  else if(h<dd){const t=(h-pd)/(dd-pd);th=lt(TH.night,TH.classic,t);badge='PRE-DAWN';}
   else if(h<de){th=TH.classic;badge='CLASSIC // DAWN';}
   else if(h<ts){th=TH.classic;badge=TH.classic.name;}
   else if(h<tp){const t=(h-ts)/(tp-ts);th=lt(TH.classic,TH.tng,t);badge=`TNG SHIFT ${Math.round(t*100)}%`;}
   else if(h<te){const t=(h-tp)/(te-tp);th=lt(TH.tng,TH.classic,t);badge=t<.3?TH.tng.name:`TNG→CLASSIC`;}
   else if(h<ds){th=TH.classic;badge=TH.classic.name;}
-  else if(h<dend){const t=(h-ds)/(dend-ds);th=lt(TH.classic,TH.dusk,t);badge=`DUSK SHIFT ${Math.round(t*100)}%`;}
+  else if(h<dend){const t=(h-ds)/(dend-ds);th=lt(TH.classic,TH.dusk,t);badge=`DUSK ${Math.round(t*100)}%`;}
   else if(h<ns){th=TH.dusk;badge=TH.dusk.name;}
-  else if(h<np){const t=(h-ns)/(np-ns);th=lt(TH.dusk,TH.night,t);badge=`DARK SHIFT ${Math.round(t*100)}%`;}
+  else if(h<np){const t=(h-ns)/(np-ns);th=lt(TH.dusk,TH.night,t);badge=`DARK ${Math.round(t*100)}%`;}
   else{th=TH.night;badge=TH.night.name;}
   return{th,badge};
 }
-
 function applyTheme(){
-  const now=new Date();
-  const h=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
+  const now=new Date(),h=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
   const{th,badge}=getTheme(h);
   const r=document.documentElement;
   r.style.setProperty('--p',th.p);r.style.setProperty('--s',th.s);
@@ -766,89 +767,25 @@ function applyTheme(){
   const tb=document.getElementById('tb');
   if(tb){tb.textContent=badge;tb.style.borderColor=th.p;tb.style.color=th.p;}
   const ts=document.getElementById('ts');
-  if(ts) ts.style.background=`linear-gradient(90deg,${th.p},${th.a2},${th.a1})`;
+  if(ts)ts.style.background=`linear-gradient(90deg,${th.p},${th.a2},${th.a1})`;
   const segs={dawn:[SR-.5,SR+1.5],day:[SR+1.5,SR+2],tng:[SR+2,SS-1.5],dusk:[SS-1.5,SS+1],night:[SS+1,24+SR-.5]};
-  Object.keys(segs).forEach(s=>{const el=document.getElementById('seg-'+s);if(!el)return;const[a,b]=segs[s];el.className='ms '+(h>=a&&h<b?'ma':'mi');});
+  const segColors={dawn:'#FF6633',day:'#FF9900',tng:'#4499FF',dusk:'#CC6622',night:'#8833BB'};
+  Object.keys(segs).forEach(s=>{
+    const el=document.getElementById('seg-'+s);if(!el)return;
+    const[a,b]=segs[s];
+    const isActive=h>=a&&h<b;
+    el.className='ms '+(isActive?'ma':'mi');
+    const span=el.querySelector('span');
+    if(span)span.style.color=isActive?segColors[s]:'rgba(255,255,255,0.3)';
+  });
   const dl=SS-SR,prog=Math.max(0,Math.min(100,((h-SR)/dl)*100));
   const sp=document.getElementById('sp');if(sp){sp.style.width=prog+'%';sp.style.background=th.p;}
 }
 applyTheme();setInterval(applyTheme,30000);
 
-// ═══════════════════ WEATHER API ═══════════════════
-const WX_ICONS={'0':'☀️','1':'🌤️','2':'⛅','3':'☁️','45':'🌫️','48':'🌫️','51':'🌦️','61':'🌧️','71':'🌨️','80':'🌦️','95':'⛈️'};
-function wmoIcon(c){const k=String(c);return WX_ICONS[k]||'🌡️';}
-function wmoDesc(c){const d={0:'CLEAR SKY',1:'MAINLY CLEAR',2:'PARTLY CLOUDY',3:'OVERCAST',45:'FOGGY',48:'FOGGY',51:'LIGHT DRIZZLE',61:'RAIN',71:'SNOW',80:'SHOWERS',95:'THUNDERSTORM'};return d[c]||'VARIABLE';}
-function cToF(c){return Math.round(c*9/5+32);}
-function msToMph(ms){return Math.round(ms*2.237);}
-function degToDir(d){const dirs=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];return dirs[Math.round(d/22.5)%16];}
-
-async function fetchWeather(){
-  try{
-    const url='https://api.open-meteo.com/v1/forecast?latitude=26.256&longitude=-80.250&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,surface_pressure,visibility,dew_point_2m,uv_index&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=temperature_2m&temperature_unit=celsius&wind_speed_unit=ms&forecast_days=3&timezone=America%2FNew_York';
-    const res=await fetch(url);
-    const d=await res.json();
-    const c=d.current;
-    const tempF=cToF(c.temperature_2m);
-    const feelsF=cToF(c.apparent_temperature);
-    const hum=c.relative_humidity_2m;
-    const windSpd=msToMph(c.wind_speed_10m);
-    const windDir=degToDir(c.wind_direction_10m);
-    const wcode=c.weather_code;
-    const icon=wmoIcon(wcode);
-    const desc=wmoDesc(wcode);
-    const hiF=cToF(d.daily.temperature_2m_max[0]);
-    const loF=cToF(d.daily.temperature_2m_min[0]);
-    const dewF=cToF(c.dew_point_2m);
-    const pres=(c.surface_pressure*0.02953).toFixed(2);
-    const vis=Math.round((c.visibility||16000)/1609);
-    const uvi=Math.round(c.uv_index||0);
-    const uviStr=uvi>=8?'VERY HIGH':uvi>=6?'HIGH':uvi>=3?'MODERATE':'LOW';
-
-    // Update all weather elements
-    const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
-    set('wx-tempF',tempF);set('wx-feels',feelsF);set('wx-cond',desc);
-    set('wx-hum',hum+'%');set('wx-wind',`${windDir} ${windSpd}mph`);
-    set('wx-uv',uviStr);set('wx-pres',pres+'"');set('wx-vis',vis+' mi');set('wx-dew',dewF+'°F');
-    set('wx-hi',hiF+'°F');set('wx-lo',loF+'°F');
-    const ib=document.getElementById('wx-icon-big');if(ib)ib.textContent=icon;
-    const mini=document.getElementById('wx-mini-val');
-    if(mini)mini.textContent=`${tempF}°F · ${desc} · ${hum}% HUM`;
-    const miniIcon=document.querySelector('#wx-mini .wx-icon');
-    if(miniIcon)miniIcon.textContent=icon;
-    set('wx-status',`● LIVE · OPEN-METEO · UPDATED ${new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})}`);
-
-    // Hourly bars (next 8 hours)
-    const now=new Date();
-    const nowH=now.getHours();
-    const hTemps=d.hourly.temperature_2m.slice(nowH,nowH+8).map(cToF);
-    const maxT=Math.max(...hTemps),minT=Math.min(...hTemps);
-    const cont=document.getElementById('wx-hourly-bars');
-    if(cont){
-      cont.innerHTML=hTemps.map((t,i)=>{
-        const pct=maxT===minT?60:30+((t-minT)/(maxT-minT))*60;
-        const hr=(nowH+i)%24;const ap=hr>=12?'P':'A';const h12=(hr%12||12);
-        return`<div class="wx-bar-row"><div class="wx-bar-name">${h12}${ap}</div><div class="wx-bar-track"><div class="wx-bar-fill" style="width:${pct}%"></div></div><div class="wx-bar-val">${t}°</div></div>`;
-      }).join('');
-    }
-
-    // Gig weather
-    const gig1wx=document.getElementById('gig1-wx');
-    if(gig1wx){const hi=cToF(d.daily.temperature_2m_max[2]||d.daily.temperature_2m_max[0]);const wc=d.daily.weather_code[2]||wcode;gig1wx.textContent=`${wmoDesc(wc)} · HI ${hiF}°F · ${hiF<90?'GOOD CONDITIONS FOR GIG':'HEAT ADVISORY'}`;}
-    const gig2wx=document.getElementById('gig2-wx');
-    const wx2=document.getElementById('wx-sys-status');if(wx2)wx2.textContent='ONLINE';
-    const wd=document.getElementById('wx-dot');if(wd){wd.className='dot don';}
-  }catch(e){
-    console.error('Weather fetch failed:',e);
-    const ws=document.getElementById('wx-status');if(ws)ws.textContent='● OFFLINE · SHOWING CACHED DATA';
-    const wd=document.getElementById('wx-dot');if(wd)wd.className='dot dwn';
-  }
-}
-fetchWeather();setInterval(fetchWeather,900000); // refresh every 15 min
-
-// ═══════════════════ CLOCK ═══════════════════
+// ═══ CLOCK ═══
 function tick(){
-  const n=new Date();
-  const h=n.getHours(),m=String(n.getMinutes()).padStart(2,'0'),s=String(n.getSeconds()).padStart(2,'0');
+  const n=new Date(),h=n.getHours(),m=String(n.getMinutes()).padStart(2,'0'),s=String(n.getSeconds()).padStart(2,'0');
   const ap=h>=12?'PM':'AM',h12=(h%12||12);
   const ts=`${String(h12).padStart(2,'0')}:${m}:${s} ${ap}`;
   const lt=document.getElementById('lt');if(lt)lt.textContent=ts;
@@ -858,25 +795,260 @@ function tick(){
 }
 tick();setInterval(tick,1000);
 
-// ═══════════════════ NAVIGATION ═══════════════════
+// ═══ NAVIGATION ═══
+const PAGE_LABELS={home:'HOME',schedule:'SCHEDULE',gigs:'GIGS & WORK',tasks:'TASKS',ideas:'IDEAS & NUGGETS',system:'SYSTEM',weather:'WEATHER',map:'MAP',stars:'STARS'};
+
+function toggleNavMenu(){
+  const m=document.getElementById('nav-menu');
+  if(m) m.style.display=m.style.display==='none'?'block':'none';
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#nav-dropdown-btn')&&!e.target.closest('#nav-menu')){
+    const m=document.getElementById('nav-menu');if(m)m.style.display='none';
+  }
+});
+
 function P(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('active'));
   const pg=document.getElementById('page-'+name);if(pg)pg.classList.add('active');
-  const tabs={'home':'nh','schedule':'nsc','gigs':'ngig','tasks':'ntsk','ideas':'nid','system':'nsys','weather':'nwx','map':'nmp','stars':'nst','deploy':''};
-  const cls=tabs[name];if(cls){const el=document.querySelector('.'+cls);if(el)el.classList.add('active');}
+  const lbl=document.getElementById('nav-active-label');
+  if(lbl)lbl.textContent=PAGE_LABELS[name]||name.toUpperCase();
+  const m=document.getElementById('nav-menu');if(m)m.style.display='none';
   if(name==='map')setTimeout(drawMap,80);
   if(name==='stars')setTimeout(drawStars,80);
 }
 
-// ═══════════════════ TASK TOGGLE ═══════════════════
+// ═══ TASK TOGGLE ═══
 function T(el){
   el.classList.toggle('done');
   el.querySelector('.tck').innerHTML=el.classList.contains('done')
     ?'<svg width="10" height="10" viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" stroke="white" stroke-width="1.5" fill="none"/></svg>':'';
 }
 
-// ═══════════════════ MAP ═══════════════════
+// ═══ WEATHER ═══
+const WX_ICONS={'0':'☀️','1':'🌤️','2':'⛅','3':'☁️','45':'🌫️','51':'🌦️','61':'🌧️','71':'🌨️','80':'🌦️','95':'⛈️'};
+function wmoIcon(c){return WX_ICONS[String(c)]||'<svg class="ico" width="16" height="16" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-wx-temp"/></svg>';}
+function wmoDesc(c){const d={0:'CLEAR SKY',1:'MAINLY CLEAR',2:'PARTLY CLOUDY',3:'OVERCAST',45:'FOGGY',51:'LIGHT DRIZZLE',61:'RAIN',71:'SNOW',80:'SHOWERS',95:'THUNDERSTORM'};return d[c]||'VARIABLE';}
+function cToF(c){return Math.round(c*9/5+32);}
+function msToMph(ms){return Math.round(ms*2.237);}
+function degToDir(d){return['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round(d/22.5)%16];}
+const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v;};
+
+async function fetchWeather(){
+  try{
+    const res=await fetch('https://api.open-meteo.com/v1/forecast?latitude=26.256&longitude=-80.250&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,uv_index&daily=temperature_2m_max,temperature_2m_min,weather_code&temperature_unit=celsius&wind_speed_unit=ms&forecast_days=3&timezone=America%2FNew_York');
+    const d=await res.json();
+    const c=d.current;
+    const tF=cToF(c.temperature_2m),feF=cToF(c.apparent_temperature);
+    const hum=c.relative_humidity_2m,wSpd=msToMph(c.wind_speed_10m),wDir=degToDir(c.wind_direction_10m);
+    const wc=c.weather_code,icon=wmoIcon(wc),desc=wmoDesc(wc);
+    const hiF=cToF(d.daily.temperature_2m_max[0]),loF=cToF(d.daily.temperature_2m_min[0]);
+    const uvi=Math.round(c.uv_index||0),uviStr=uvi>=8?'VERY HIGH':uvi>=6?'HIGH':uvi>=3?'MODERATE':'LOW';
+    // Weather page
+    set('wx-tempF',`${tF}`);set('wx-feels',feF);set('wx-cond',desc);set('wx-hum',hum+'%');
+    set('wx-wind',`${wDir} ${wSpd}mph`);set('wx-hi',hiF+'°F');set('wx-lo',loF+'°F');
+    set('wx-uv',uviStr);
+    const ib=document.getElementById('wx-icon-big');if(ib)ib.textContent=icon;
+    // Home mini
+    const th=document.getElementById('wx-temp-home');if(th)th.innerHTML=`${tF}<span style="font-size:0.9rem;color:rgba(255,255,255,0.5)">°F</span>`;
+    set('wx-cond-home',desc);set('wx-sub-home',`HI ${hiF}° · LO ${loF}° · ${hum}% HUM`);
+    const ih=document.getElementById('wx-icon-home');if(ih)ih.textContent=icon;
+    const mx=document.getElementById('wx-mini-val');if(mx)mx.textContent=`${tF}°F · ${desc}`;
+    const mi=document.querySelector('#wx-mini span');if(mi)mi.textContent=icon;
+    set('wx-status',`● LIVE · OPEN-METEO · ${new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})}`);
+    // Gig wx
+    const gi1=document.getElementById('gig1-wx');
+    if(gi1){const g1hi=cToF(d.daily.temperature_2m_max[2]||d.daily.temperature_2m_max[0]);gi1.textContent=`${wmoDesc(d.daily.weather_code[2]||wc)} · HI ${g1hi}°F · ${g1hi<92?'GOOD CONDITIONS':'HEAT ADVISORY'}`;}
+    const gi2=document.getElementById('gig2-wx');
+    if(gi2){const g2hi=cToF(d.daily.temperature_2m_max[Math.min(6,d.daily.temperature_2m_max.length-1)]);gi2.textContent=`FORECAST: HI ~${g2hi}°F`;}
+    const dw=document.getElementById('dot-wx');if(dw)dw.className='dot don';
+  }catch(e){
+    set('wx-status','● OFFLINE');
+    const dw=document.getElementById('dot-wx');if(dw)dw.className='dot dwn';
+  }
+}
+
+// ═══ CLAUDE API v2 ═══
+const API_URL='https://lcars-api.onrender.com';
+const SID='lcars-'+Date.now();
+let chatHist=[];
+
+async function sendToClaude(){
+  const inp=document.getElementById('claude-input');
+  const load=document.getElementById('claude-load');
+  const msg=inp?inp.value.trim():'';
+  if(!msg)return;
+  inp.value='';
+  addChat('YOU',msg,'rgba(255,153,0,0.8)');
+  if(load)load.style.display='block';
+  try{
+    const r=await fetch(`${API_URL}/api/chat`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,sessionId:SID,context:'LCARS Dashboard'})});
+    const d=await r.json();
+    if(load)load.style.display='none';
+    addChat('LCARS',d.response||d.error,'var(--g)');
+    const t=document.getElementById('claude-turns');if(t&&d.turns)t.textContent=d.turns+' TURNS';
+    const da=document.getElementById('dot-api');if(da)da.className='dot don';
+  }catch(e){
+    if(load)load.style.display='none';
+    addChat('ERR','Cannot reach API — '+e.message,'var(--a1)');
+    const da=document.getElementById('dot-api');if(da)da.className='dot dwn';
+  }
+}
+
+function addChat(role,text,color){
+  chatHist.push({role,text});
+  const hist=document.getElementById('claude-hist');
+  const brief=document.getElementById('claude-brief');
+  if(!hist)return;
+  hist.style.display='block';
+  if(brief&&chatHist.length>0)brief.style.display='none';
+  const d=document.createElement('div');
+  d.style.cssText='margin-bottom:6px;font-family:"Share Tech Mono",monospace;font-size:0.55rem;line-height:1.5;word-break:break-word;';
+  d.innerHTML=`<span style="color:${color};font-weight:700;letter-spacing:0.1em;">${role} ▸ </span><span style="color:rgba(255,255,255,0.75);">${text}</span>`;
+  hist.appendChild(d);hist.scrollTop=hist.scrollHeight;
+}
+
+async function clearClaude(){
+  chatHist=[];
+  const hist=document.getElementById('claude-hist');if(hist){hist.innerHTML='';hist.style.display='none';}
+  const t=document.getElementById('claude-turns');if(t)t.textContent='';
+  try{await fetch(`${API_URL}/api/chat/clear`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessionId:SID})});}catch(e){}
+  loadBriefing();
+}
+
+async function loadBriefing(){
+  const brief=document.getElementById('claude-brief');if(!brief)return;
+  try{
+    const r=await fetch(`${API_URL}/api/briefing`);
+    const d=await r.json();
+    if(d.briefing&&chatHist.length===0){
+      brief.innerHTML=d.briefing.replace(/\n/g,'<br>');
+      brief.style.display='block';
+    }
+    const da=document.getElementById('dot-api');if(da)da.className='dot don';
+  }catch(e){
+    const da=document.getElementById('dot-api');if(da)da.className='dot dwn';
+  }
+}
+
+// ═══ iCAL MULTI-CALENDAR ═══
+const CAL_COLORS=['#CC4444','#4499FF','#FF9900','#9999CC','#00FF88','#FFCC66'];
+const CAL_LABELS=['FROST WORK','FROST SHOWS','PERSONAL','SHARED','SCHOOL','FAMILY'];
+
+async function loadCalendar(){
+  const URLS=[
+    'https://calendar.google.com/calendar/ical/lespinosa%40frostflorida.com/private-1bb59553e99af6e8fc4f4d2074182626/basic.ics',
+    'https://calendar.google.com/calendar/ical/c_onnn1dvi37rh9fdireb8a81i4c%40group.calendar.google.com/public/basic.ics',
+  ].filter(Boolean);
+  if(!URLS.length){ renderFallbackSchedule(); return; }
+  try{
+    const params=URLS.map(u=>`url=${encodeURIComponent(u)}`).join('&');
+    const r=await fetch(`${API_URL}/api/calendar?${params}`);
+    const d=await r.json();
+    const dc=document.getElementById('dot-cal');if(dc)dc.className='dot don';
+    if(d.events&&d.events.length>0){
+      renderCalendar(d.events);
+    } else {
+      renderFallbackSchedule();
+    }
+  }catch(e){
+    renderFallbackSchedule();
+    console.log('iCal error:',e.message);
+  }
+  // Auto-refresh every 10 minutes
+  setTimeout(loadCalendar, 10*60*1000);
+}
+
+function renderFallbackSchedule(){
+  const now=new Date();const h=now.getHours(),m=now.getMinutes();
+  const status=document.getElementById('cal-status');if(status)status.textContent='OFFLINE MODE';
+  const anchors=[
+    {time:'06:45',end:'07:30',label:'School Drop-off <svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-delta"/></svg>',sub:'DEPART 06:45 // DUE 07:15',bar:'var(--a4)'},
+    {time:'08:00',end:'09:00',label:'Morning Buffer',sub:'PROTECTED — NO MEETINGS',bar:'var(--p)'},
+    {time:'09:00',end:'12:00',label:'Deep Work Block',sub:'MON–THU // FOCUS',bar:'var(--p)'},
+    {time:'19:30',end:'20:00',label:'Kids Bedtime <svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-moon"/></svg>',sub:'ANCHOR — PROTECTED',bar:'var(--a4)'},
+    {time:'22:00',end:'23:30',label:'Workout <svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-workout"/></svg>',sub:'24HR GYM // MON WED FRI',bar:'#4488FF'},
+  ];
+  const todayCont=document.getElementById('today-schedule');
+  if(todayCont){todayCont.innerHTML=anchors.map(a=>{
+    const[ah,am]=a.time.split(':').map(Number);
+    const[eh,em]=a.end.split(':').map(Number);
+    const isPast=h>eh||(h===eh&&m>em);
+    const isNow=(h>ah||(h===ah&&m>=am))&&(h<eh||(h===eh&&m<em));
+    return `<div class="si" style="opacity:${isPast?'0.4':'1'}">
+      <div class="stm" style="${isNow?'color:var(--g);':''}">${a.time}</div>
+      <div class="sbar" style="background:${a.bar};${isNow?'box-shadow:0 0 5px '+a.bar:''}"></div>
+      <div class="sin"><div class="sti">${a.label}${isNow?'<span class="nbadge">NOW</span>':''}</div><div class="ssu">${a.sub}</div></div>
+    </div>`;
+  }).join('');}
+}
+
+function fmtTime(iso){
+  const d=new Date(iso);
+  if(isNaN(d))return'--:--';
+  return d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true}).replace(' ','');
+}
+function fmtDate(iso){
+  const d=new Date(iso);
+  if(isNaN(d))return'--';
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase();
+}
+function isToday(iso){const d=new Date(iso);return d.toDateString()===new Date().toDateString();}
+
+function renderCalendar(events){
+  const c=document.getElementById('live-cal-events');
+  const todayCont=document.getElementById('today-schedule');
+  const now=new Date();
+  const today=events.filter(e=>isToday(e.start));
+  const upcoming=events.filter(e=>!isToday(e.start)&&new Date(e.start)>now).slice(0,7);
+
+  const row=(e,showDate=false)=>{
+    const color=CAL_COLORS[e.calendarIndex||0]||'#FF9900';
+    const cal=CAL_LABELS[e.calendarIndex||0]||'CAL';
+    const eStart=new Date(e.start);
+    const eEnd=e.end?new Date(e.end):eStart;
+    const isPast=eEnd<now;
+    const isNow=eStart<=now&&eEnd>=now;
+    const timeLabel=showDate?fmtDate(e.start):fmtTime(e.start);
+    return `<div class="si" style="opacity:${isPast?'0.4':'1'}">
+      <div class="stm" style="color:${isNow?'var(--g)':color};min-width:52px;">${timeLabel}</div>
+      <div class="sbar" style="background:${color};${isNow?'box-shadow:0 0 6px '+color:''}"></div>
+      <div class="sin">
+        <div class="sti" style="color:#fff">${e.title||'EVENT'}${isNow?'<span class="nbadge">NOW</span>':''}</div>
+        <div class="ssu">${cal}${e.location?' · '+e.location.split(',')[0].toUpperCase():''}</div>
+      </div>
+    </div>`;
+  };
+
+  // Home page — today only
+  if(todayCont){
+    if(today.length){
+      todayCont.innerHTML=today.map(e=>row(e,false)).join('');
+      const status=document.getElementById('cal-status');
+      if(status)status.textContent=`${today.length} TODAY · ${upcoming.length} UPCOMING`;
+    } else {
+      todayCont.innerHTML=`<div class="ssu" style="padding:8px 0;color:var(--dim);">NO CALENDAR EVENTS TODAY</div>`;
+    }
+  }
+
+  // Schedule page — today + upcoming
+  if(c){
+    let html='';
+    if(today.length){
+      html+=`<div class="phl" style="color:var(--g);opacity:0.7;font-size:0.56rem;letter-spacing:0.15em;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(0,255,136,0.1);">TODAY</div>`;
+      html+=today.map(e=>row(e,false)).join('');
+    } else {
+      html+=`<div class="ssu" style="padding:4px 0;color:var(--dim);">NO CALENDAR EVENTS TODAY</div>`;
+    }
+    if(upcoming.length){
+      html+=`<div class="phl" style="color:var(--dim);opacity:0.6;font-size:0.56rem;letter-spacing:0.15em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid rgba(255,153,0,0.1);">UPCOMING</div>`;
+      html+=upcoming.map(e=>row(e,true)).join('');
+    }
+    c.innerHTML=html;
+  }
+}
+
+// ═══ MAP ═══
 let maf=null;
 function drawMap(){
   const C=document.getElementById('map-container'),cv=document.getElementById('map-canvas');
@@ -890,7 +1062,7 @@ function drawMap(){
     for(let y=0;y<H;y+=28){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
     [45,90,145,200].forEach((r,i)=>{ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=`rgba(68,136,255,${.07+i*.025})`;ctx.lineWidth=1;ctx.stroke();});
     [[0,H*.48,W,H*.48],[W*.42,0,W*.42,H],[0,H*.3,W,H*.3],[0,H*.65,W,H*.65],[W*.25,0,W*.25,H],[W*.62,0,W*.62,H],[W*.8,0,W*.8,H]].forEach(([x1,y1,x2,y2])=>{ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle='rgba(68,136,255,0.18)';ctx.lineWidth=2;ctx.stroke();});
-    [{x:W*.66,y:H*.76,l:'1 HOTEL',c:'#CC4444'},{x:W*.86,y:H*.34,l:'MAR-A-LAGO',c:'#FF9900'}].forEach(g=>{
+    [{x:W*.66,y:H*.76,l:'1 HOTEL',c:'#CC4444'},{x:W*.86,y:H*.34,l:'MAR-A-LAGO',c:'#FF9900'},{x:W*.42,y:H*.55,l:'701 BOUTWELL',c:'#FFCC66'}].forEach(g=>{
       ctx.beginPath();ctx.arc(g.x,g.y,5,0,Math.PI*2);ctx.fillStyle=g.c;ctx.fill();
       ctx.beginPath();ctx.arc(g.x,g.y,10,0,Math.PI*2);ctx.strokeStyle=g.c+'55';ctx.lineWidth=1;ctx.stroke();
       ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(g.x,g.y);ctx.strokeStyle=g.c+'2a';ctx.lineWidth=1;ctx.setLineDash([4,7]);ctx.stroke();ctx.setLineDash([]);
@@ -904,7 +1076,7 @@ function drawMap(){
   anim();
 }
 
-// ═══════════════════ STAR MAP ═══════════════════
+// ═══ STAR MAP ═══
 const NS=[
   {n:'Sirius',ra:6.75,dec:-16.7,m:-1.46},{n:'Canopus',ra:6.4,dec:-52.7,m:-.72},
   {n:'Arcturus',ra:14.26,dec:19.2,m:-.05},{n:'Vega',ra:18.62,dec:38.8,m:.03},
@@ -923,7 +1095,6 @@ const FT=[];for(let i=0;i<350;i++)FT.push({ra:Math.random()*24,dec:Math.random()
 const AS=[...NS,...FT];
 function lst(lon){const n=new Date();const JD=n/86400000+2440587.5;const T=(JD-2451545)/36525;let G=280.46061837+360.98564736629*(JD-2451545)+.000387933*T*T;G=((G%360)+360)%360;return(G+lon)/15;}
 function altaz(ra,dec,lat,L){const ha=(L-ra)*15,haR=ha*Math.PI/180,dR=dec*Math.PI/180,lR=lat*Math.PI/180;const sA=Math.sin(dR)*Math.sin(lR)+Math.cos(dR)*Math.cos(lR)*Math.cos(haR);const alt=Math.asin(Math.max(-1,Math.min(1,sA)))*180/Math.PI;const cAz=(Math.sin(dR)-Math.sin(alt*Math.PI/180)*Math.sin(lR))/(Math.cos(alt*Math.PI/180)*Math.cos(lR));let az=Math.acos(Math.max(-1,Math.min(1,cAz)))*180/Math.PI;if(Math.sin(haR)>0)az=360-az;return{alt,az};}
-
 function drawStars(){
   const C=document.getElementById('star-map-container'),cv=document.getElementById('star-canvas');
   if(!C||!cv)return;
@@ -955,6 +1126,123 @@ function drawStars(){
 }
 
 window.addEventListener('resize',()=>{const pg=document.querySelector('.page.active');if(pg?.id==='page-map')drawMap();if(pg?.id==='page-stars')drawStars();});
+
+// ═══ INIT ═══
+fetchWeather();
+setInterval(fetchWeather,900000);
+// ═══ LCARS ICON SYSTEM ═══
+// Returns an SVG use element as HTML string
+function ico(id, size=16, color='currentColor'){
+  return `<svg class="ico" width="${size}" height="${size}" viewBox="0 0 24 24" style="color:${color};"><use href="#ico-${id}"/></svg>`;
+}
+
+// Replace all emoji instances with LCARS SVG icons
+function replaceEmojis(){
+  const map = {
+    '🎒': ico('delta', 15),
+    '🌙': ico('moon', 15),
+    '💪': ico('workout', 15),
+    '<svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg>': ico('idea', 15),
+    '📅': ico('cal', 15),
+    '📍': ico('loc', 14),
+    '🏠': ico('home', 15),
+    '🎬': ico('video', 15),
+    '✅': ico('check', 15),
+    '⚙️': ico('gear', 15),
+    '⚙': ico('gear', 15),
+    '🗺': ico('map', 15),
+    '📊': ico('chart', 15),
+    '🚀': ico('launch', 15),
+    '<svg class="ico" width="16" height="16" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-wx-temp"/></svg>': ico('wx-temp', 16),
+    '<svg class="ico" width="16" height="16" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-wx-temp"/></svg>': ico('wx-temp', 16),
+    '⛅': ico('wx-cloud', 16),
+    '🌤': ico('wx-cloud', 16),
+    '🌤️': ico('wx-cloud', 16),
+    '☀': ico('wx-clear', 16),
+    '☀️': ico('wx-clear', 16),
+    '🌦': ico('wx-rain', 16),
+    '☁': ico('wx-cloud', 16),
+    '☁️': ico('wx-cloud', 16),
+    '🌫': ico('wx-cloud', 16),
+    '🌧': ico('wx-rain', 16),
+    '🌧️': ico('wx-rain', 16),
+    '🌨': ico('wx-rain', 16),
+    '⛈': ico('wx-rain', 16),
+    '⛈️': ico('wx-rain', 16),
+    '🎮': ico('sys', 15),
+    '🎨': ico('idea', 15),
+    '📱': ico('sys', 15),
+    '⌚': ico('cal', 15),
+    '📋': ico('chart', 15),
+    '📧': ico('sys', 15),
+    '⭐': ico('stars', 15),
+  };
+  // Walk all text nodes and replace
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+  const nodes = [];
+  while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(node => {
+    let text = node.textContent;
+    let changed = false;
+    Object.entries(map).forEach(([emoji, svg]) => {
+      if(text.includes(emoji)){ text = text.replaceAll(emoji, ''); changed = true; }
+    });
+    if(changed){
+      const span = document.createElement('span');
+      // Re-insert with SVGs
+      let html = node.textContent;
+      Object.entries(map).forEach(([emoji, svg]) => {
+        html = html.replaceAll(emoji, svg);
+      });
+      span.innerHTML = html;
+      node.parentNode.replaceChild(span, node);
+    }
+  });
+}
+
+// Also replace in dynamically generated content
+const _origRenderCalendar = typeof renderCalendar === 'function' ? renderCalendar : null;
+
+loadBriefing();
+loadCalendar();
+updateDayTracker();
+setInterval(updateDayTracker, 60 * 1000);
+
+// Replace emojis after DOM settles
+setTimeout(replaceEmojis, 500);
+// Re-run after calendar loads
+setTimeout(replaceEmojis, 3000);
+function updateDayTracker(){
+  const now = new Date();
+  const h = now.getHours(), m = now.getMinutes();
+  // Day spans 06:00 to 23:00 = 17 hours = 1020 minutes
+  const dayStart = 6 * 60;  // 06:00
+  const dayEnd = 23 * 60;   // 23:00
+  const nowMins = h * 60 + m;
+  const pct = Math.max(0, Math.min(100, ((nowMins - dayStart) / (dayEnd - dayStart)) * 100));
+
+  const bar = document.getElementById('tracker-bar');
+  const pctEl = document.getElementById('tracker-pct');
+  const nowEl = document.getElementById('tracker-now');
+
+  if(bar) bar.style.width = pct.toFixed(1) + '%';
+  if(pctEl) pctEl.textContent = Math.round(pct) + '%';
+
+  // Show current time at the marker
+  const timeStr = now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:false});
+  if(nowEl) nowEl.textContent = timeStr;
+
+  // Color shifts based on time of day
+  if(bar){
+    if(h < 9) bar.style.background = 'linear-gradient(90deg,#FF6633,#FF9900)';        // dawn
+    else if(h < 14) bar.style.background = 'linear-gradient(90deg,#FF9900,#FFCC66)';  // day
+    else if(h < 18) bar.style.background = 'linear-gradient(90deg,#4499FF,#00FF88)';  // afternoon
+    else if(h < 21) bar.style.background = 'linear-gradient(90deg,#CC6622,#9933AA)';  // dusk
+    else bar.style.background = 'linear-gradient(90deg,#6633AA,#330066)';             // night
+  }
+}
+updateDayTracker();
+setInterval(updateDayTracker, 60 * 1000);
 </script>
 </body>
 </html>
