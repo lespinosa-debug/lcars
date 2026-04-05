@@ -1007,8 +1007,8 @@ async function loadBriefing(){
 }
 
 // ═══ iCAL MULTI-CALENDAR ═══
-const CAL_COLORS=['#CC4444','#4499FF','#FF9900','#9999CC','#00FF88','#FFCC66'];
-const CAL_LABELS=['FROST WORK','FROST SHOWS','PERSONAL','SHARED','SCHOOL','FAMILY'];
+const CAL_COLORS=['#FF9900','#CC4444','#9933CC','#4499FF','#00BB55','#FFCC00'];
+const CAL_LABELS=['FROST WORK','FROST SHOWS','PERSONAL','SKYE & LUIS','SCHOOL','FAMILY'];
 
 async function pingAPI(){
   try{ await fetch(`${API_URL}/health`,{signal:AbortSignal.timeout(4000)}); } catch(e){}
@@ -1016,8 +1016,13 @@ async function pingAPI(){
 
 async function loadCalendar(retryCount=0){
   const URLS=[
-    'https://calendar.google.com/calendar/ical/lespinosa%40frostflorida.com/private-1bb59553e99af6e8fc4f4d2074182626/basic.ics',
-    'https://calendar.google.com/calendar/ical/c_onnn1dvi37rh9fdireb8a81i4c%40group.calendar.google.com/public/basic.ics',
+    'https://calendar.google.com/calendar/ical/lespinosa%40frostflorida.com/private-1bb59553e99af6e8fc4f4d2074182626/basic.ics',   // 0 orange  FROST WORK
+    'https://calendar.google.com/calendar/ical/c_onnn1dvi37rh9fdireb8a81i4c%40group.calendar.google.com/public/basic.ics',         // 1 red     FROST SHOWS
+    // ADD YOUR REMAINING iCAL URLs BELOW — paste from Google Calendar settings
+    // 'https://calendar.google.com/calendar/ical/luislre%40gmail.com/private-XXXXX/basic.ics',          // 2 purple  PERSONAL
+    // 'https://calendar.google.com/calendar/ical/SHARED_CAL_ID%40group.calendar.google.com/public/basic.ics', // 3 blue    SKYE & LUIS
+    // 'https://calendar.google.com/calendar/ical/SCHOOL_CAL_ID%40group.calendar.google.com/public/basic.ics', // 4 green   SCHOOL
+    // 'https://calendar.google.com/calendar/ical/FAMILY_CAL_ID%40group.calendar.google.com/public/basic.ics', // 5 yellow  FAMILY
   ].filter(Boolean);
   if(!URLS.length){ renderFallbackSchedule(); return; }
   try{
