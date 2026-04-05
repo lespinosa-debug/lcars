@@ -518,10 +518,12 @@ canvas{display:block;}
           <div class="phl" style="color:var(--a2)">Task Queue</div>
           <div class="pid">SYS-4403</div><div class="pha" style="color:var(--a2)">▶</div>
         </div>
-        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">API Phase 2 — local dev + first script</div><div class="tpr thi">HIGH</div></div>
-        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Gig prep — MPM Bioimpact APR 6</div><div class="tpr thi">HIGH</div></div>
-        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Weekly Review — Friday 3pm</div><div class="tpr">MED</div></div>
-        <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">SOPs — capture gig workflow</div><div class="tpr">MED</div></div>
+        <div id="live-tasks">
+          <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">API Phase 2 — local dev + first script</div><div class="tpr thi">HIGH</div></div>
+          <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Gig prep — MPM Bioimpact APR 6</div><div class="tpr thi">HIGH</div></div>
+          <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">Weekly Review — Friday 3pm</div><div class="tpr">MED</div></div>
+          <div class="ti" onclick="T(this)"><div class="tck"></div><div class="ttx">SOPs — capture gig workflow</div><div class="tpr">MED</div></div>
+        </div>
       </div>
 
       <!-- NUGGETS -->
@@ -530,10 +532,13 @@ canvas{display:block;}
           <div class="phl" style="color:var(--a3)">Ideas & Nuggets</div>
           <div class="pid">SYS-4404</div><div class="pha" style="color:var(--a3)">▶</div>
         </div>
-        <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">LCARS as main personal OS</div><div class="nts">TODAY</div></div>
-        <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">Stream Deck as Claude command surface</div><div class="nts">TODAY</div></div>
-        <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">Pi as always-on control brain</div><div class="nts">TODAY</div></div>
-        <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">Circadian theme engine built + live</div><div class="nts">TODAY</div></div>
+        <div id="live-nuggets">
+          <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">LCARS as main personal OS</div><div class="nts">TODAY</div></div>
+          <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">Stream Deck as Claude command surface</div><div class="nts">TODAY</div></div>
+          <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">Mac mini as full-time home AI server</div><div class="nts">APR 5</div></div>
+          <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">Pi as always-on control brain</div><div class="nts">TODAY</div></div>
+          <div class="ni"><div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div><div class="ntx">Circadian theme engine built + live</div><div class="nts">TODAY</div></div>
+        </div>
       </div>
     </div>
 
@@ -1207,6 +1212,36 @@ loadBriefing();
 loadCalendar();
 updateDayTracker();
 setInterval(updateDayTracker, 60 * 1000);
+
+// ═══ LIVE STORE POLLING (nuggets/tasks pushed from Claude chat) ═══
+async function pollStore(){
+  try {
+    const res = await fetch(`${API_URL}/api/store`);
+    const data = await res.json();
+    // Inject live nuggets
+    const nuggPanel = document.getElementById('live-nuggets');
+    if(nuggPanel && data.nuggets?.length){
+      nuggPanel.innerHTML = data.nuggets.slice(0,6).map(n=>`
+        <div class="ni">
+          <div class="nico"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg></div>
+          <div class="ntx">${n.text}</div>
+          <div class="nts">${n.date}</div>
+        </div>`).join('');
+    }
+    // Inject live tasks
+    const taskPanel = document.getElementById('live-tasks');
+    if(taskPanel && data.tasks?.length){
+      taskPanel.innerHTML = data.tasks.slice(0,5).map(t=>`
+        <div class="ti" onclick="this.classList.toggle('done')">
+          <div class="tck"></div>
+          <div class="ttx">${t.text}</div>
+          <div class="tpr ${t.priority==='HIGH'?'thi':''}">${t.priority}</div>
+        </div>`).join('');
+    }
+  } catch(e){}
+}
+pollStore();
+setInterval(pollStore, 30000);
 
 // Replace emojis after DOM settles
 setTimeout(replaceEmojis, 500);
