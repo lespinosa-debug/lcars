@@ -168,7 +168,7 @@
 </svg>
 <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-:root{--p:#FF9900;--s:#FFCC99;--a1:#CC4444;--a2:#9999CC;--a3:#CCAAFF;--a4:#FFCC66;--bg:#000;--bg2:#0a0500;--dim:#553300;--g:#00FF88;--pb:rgba(255,153,0,0.15);--er:34px;}
+:root{--p:#FF9900;--s:#FFCC99;--a1:#CC4444;--a2:#9999CC;--a3:#CCAAFF;--a4:#FFCC66;--bg:#000;--bg2:#0a0500;--dim:#553300;--g:#00FF88;--pb:rgba(255,153,0,0.15);--er:26px;}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html{font-size:10px;}
 html,body{height:100%;height:-webkit-fill-available;background:var(--bg);overflow:hidden;font-family:'Antonio',sans-serif;color:#fff;font-weight:700;touch-action:manipulation;}
@@ -178,18 +178,18 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 #app{display:flex;flex-direction:column;height:100vh;height:-webkit-fill-available;width:100vw;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0);}
 
 /* HEADER */
-.lh{display:flex;align-items:stretch;height:58px;flex-shrink:0;}
-.he{width:80px;background:var(--p);border-radius:var(--er) 0 0 0;flex-shrink:0;position:relative;transition:background 30s;}
+.lh{display:flex;align-items:stretch;height:58px;flex-shrink:0;overflow:hidden;width:100%;}
+.he{width:64px;background:var(--p);border-radius:var(--er) 0 0 0;flex-shrink:0;position:relative;transition:background 30s;}
 .he::after{content:'';position:absolute;bottom:0;right:0;width:var(--er);height:var(--er);background:var(--bg);border-radius:var(--er) 0 0 0;transition:background 30s;}
-.hg{width:6px;background:var(--bg);flex-shrink:0;}
-.hb{flex:1;background:var(--p);display:flex;align-items:center;padding:0 14px;transition:background 30s;}
-.ht{font-size:clamp(0.85rem,3vw,1.5rem);font-weight:800;letter-spacing:0.1em;color:#fff;text-transform:uppercase;white-space:nowrap;}
-.hr{margin-left:auto;text-align:right;padding-left:8px;}
+.hg{width:5px;background:var(--bg);flex-shrink:0;}
+.hb{flex:1;min-width:0;background:var(--p);display:flex;align-items:center;padding:0 10px;transition:background 30s;overflow:hidden;}
+.ht{font-size:clamp(0.75rem,2.5vw,1.4rem);font-weight:800;letter-spacing:0.1em;color:#fff;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+.hr{margin-left:auto;text-align:right;padding-left:6px;flex-shrink:0;min-width:0;}
 .hs{font-family:'Share Tech Mono',monospace;font-size:clamp(0.62rem,2vw,0.78rem);color:#fff;letter-spacing:0.06em;line-height:1.75;font-weight:800;}
-.hp{width:68px;background:var(--s);border-radius:0 var(--er) 0 0;flex-shrink:0;margin-left:6px;transition:background 30s;}
+.hp{width:72px;background:var(--s);border-radius:0 var(--er) 0 0;flex-shrink:0;margin-left:5px;transition:background 30s;}
 
 /* MODE BAR */
-.mb{height:24px;flex-shrink:0;display:flex;align-items:center;background:var(--bg2);border-bottom:1px solid var(--pb);padding:0 10px 0 96px;gap:10px;transition:background 30s;}
+.mb{height:24px;flex-shrink:0;display:flex;align-items:center;background:var(--bg2);border-bottom:1px solid var(--pb);padding:0 10px 0 80px;gap:10px;transition:background 30s;}
 .ms{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:800;background:none;border:none;outline:none;cursor:pointer;padding:2px 5px;border-radius:3px;transition:background 0.15s;-webkit-appearance:none;}
 .ms:hover{background:rgba(255,255,255,0.1);}
 .ms:active{background:rgba(255,255,255,0.2);}
@@ -203,7 +203,7 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 
 /* NAV DROPDOWN */
 .ln{display:flex;height:48px;flex-shrink:0;}
-.nf{width:96px;background:var(--p);flex-shrink:0;transition:background 30s;}
+.nf{width:80px;background:var(--p);flex-shrink:0;transition:background 30s;}
 .ng{width:6px;background:var(--bg);flex-shrink:0;}
 .nb{flex:1;display:flex;background:var(--p);transition:background 30s;align-items:center;padding:0 12px;gap:10px;}
 .ne{width:56px;background:var(--a1);flex-shrink:0;margin-left:6px;}.ng{width:10px;background:var(--bg);flex-shrink:0;}
@@ -218,8 +218,8 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 
 /* BODY */
 .lb{display:flex;flex:1;overflow:hidden;}
-.lsb{width:96px;flex-shrink:0;display:flex;flex-direction:column;gap:5px;padding:6px 0;align-items:flex-end;}
-.sb{border-radius:22px 0 0 22px;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-size:0.68rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#fff;cursor:pointer;border:none;outline:none;transition:filter 0.15s;height:38px;width:94px;-webkit-appearance:none;}
+.lsb{width:80px;flex-shrink:0;display:flex;flex-direction:column;gap:5px;padding:6px 0;align-items:flex-end;}
+.sb{border-radius:22px 0 0 22px;display:flex;align-items:center;justify-content:flex-end;padding-right:9px;font-size:0.68rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#fff;cursor:pointer;border:none;outline:none;transition:filter 0.15s;height:38px;width:78px;-webkit-appearance:none;}
 .sb.sm{height:26px;width:80px;}
 .sb:hover{filter:brightness(1.3);}.sb:active{filter:brightness(0.7);}
 .s1{background:var(--p);}.s2{background:var(--s);}.s3{background:var(--a2);}.s4{background:var(--a1);}.s5{background:var(--a3);}.s6{background:var(--a4);}
@@ -232,12 +232,12 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .dwn{background:var(--a4);box-shadow:0 0 5px var(--a4);}
 .dof{background:var(--dim);}
 
-.lg{width:6px;background:var(--bg);flex-shrink:0;}
+.lg{width:5px;background:var(--bg);flex-shrink:0;}
 .lc{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 8px 6px 0;display:flex;flex-direction:column;gap:7px;}
 
 /* FOOTER */
 .lf{display:flex;height:44px;flex-shrink:0;}
-.fe{width:96px;background:var(--p);border-radius:0 0 0 var(--er);flex-shrink:0;transition:background 30s;}
+.fe{width:80px;background:var(--p);border-radius:0 0 0 var(--er);flex-shrink:0;transition:background 30s;}
 .fg{width:6px;background:var(--bg);flex-shrink:0;}
 .fb{flex:1;background:var(--p);display:flex;align-items:center;padding:0 12px;gap:7px;transition:background 30s;}
 .fc{height:28px;padding:0 12px;border-radius:14px;background:rgba(0,0,0,0.25);font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,0.2);outline:none;cursor:pointer;font-family:'Antonio',sans-serif;-webkit-appearance:none;min-height:38px;min-width:48px;}
@@ -358,12 +358,12 @@ canvas{display:block;}
 
 /* LANDSCAPE */
 @media(orientation:landscape){
-  .lh{height:46px;}.he{width:80px;border-radius:25px 0 0 0;}.he::after{width:25px;height:25px;border-radius:25px 0 0 0;}
-  .hp{width:50px;border-radius:0 25px 0 0;}.ht{font-size:1.1rem;}
-  .mb{padding-left:90px;height:20px;}
-  .ln{height:34px;}.nf{width:80px;}.ne{width:50px;}
-  .lsb{width:84px;}.sb{width:82px;height:32px;font-size:0.62rem;}.sb.sm{height:22px;width:64px;}
-  .lf{height:40px;}.fe{width:80px;border-radius:0 0 0 25px;}.fp{width:50px;border-radius:0 0 25px 0;}.fc{font-size:0.6rem;min-height:34px;}
+  .lh{height:46px;}.he{width:64px;border-radius:22px 0 0 0;}.he::after{width:22px;height:22px;border-radius:22px 0 0 0;}
+  .hp{width:72px;border-radius:0 22px 0 0;}.ht{font-size:1rem;}
+  .mb{padding-left:75px;height:20px;}
+  .ln{height:34px;}.nf{width:75px;}.ne{width:50px;}
+  .lsb{width:72px;}.sb{width:70px;height:32px;font-size:0.58rem;}.sb.sm{height:22px;width:58px;}
+  .lf{height:40px;}.fe{width:72px;border-radius:0 0 0 22px;}.fp{width:50px;border-radius:0 0 22px 0;}.fc{font-size:0.6rem;min-height:34px;}
   #map-container{height:200px;}#star-map-container{height:185px;}
   .sysg{grid-template-columns:1fr 1fr 1fr;}
 }
@@ -374,6 +374,14 @@ canvas{display:block;}
 @keyframes bl{0%,100%{opacity:1;}50%{opacity:0;}}
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--dim);border-radius:2px;}
 </style>
+<script>
+// Auto-scale 1.5x on iPhone/iPad — runs before body renders
+(function(){
+  const ua = navigator.userAgent;
+  const isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+  if(isIOS) document.documentElement.style.fontSize = '20px';
+})();
+</script>
 </head>
 <body>
 <div id="ts"></div><div id="tb">LOADING...</div>
@@ -987,7 +995,11 @@ async function loadBriefing(){
 const CAL_COLORS=['#CC4444','#4499FF','#FF9900','#9999CC','#00FF88','#FFCC66'];
 const CAL_LABELS=['FROST WORK','FROST SHOWS','PERSONAL','SHARED','SCHOOL','FAMILY'];
 
-async function loadCalendar(){
+async function pingAPI(){
+  try{ await fetch(`${API_URL}/health`,{signal:AbortSignal.timeout(4000)}); } catch(e){}
+}
+
+async function loadCalendar(retryCount=0){
   const URLS=[
     'https://calendar.google.com/calendar/ical/lespinosa%40frostflorida.com/private-1bb59553e99af6e8fc4f4d2074182626/basic.ics',
     'https://calendar.google.com/calendar/ical/c_onnn1dvi37rh9fdireb8a81i4c%40group.calendar.google.com/public/basic.ics',
@@ -995,7 +1007,7 @@ async function loadCalendar(){
   if(!URLS.length){ renderFallbackSchedule(); return; }
   try{
     const params=URLS.map(u=>`url=${encodeURIComponent(u)}`).join('&');
-    const r=await fetch(`${API_URL}/api/calendar?${params}`);
+    const r=await fetch(`${API_URL}/api/calendar?${params}`,{signal:AbortSignal.timeout(12000)});
     const d=await r.json();
     const dc=document.getElementById('dot-cal');if(dc)dc.className='dot don';
     if(d.events&&d.events.length>0){
@@ -1004,11 +1016,19 @@ async function loadCalendar(){
       renderFallbackSchedule();
     }
   }catch(e){
-    renderFallbackSchedule();
+    // Retry once after 8 seconds if backend was sleeping
+    if(retryCount===0){
+      const status=document.getElementById('cal-status');
+      if(status)status.textContent='WAKING API...';
+      await pingAPI();
+      setTimeout(()=>loadCalendar(1), 8000);
+    } else {
+      renderFallbackSchedule();
+    }
     console.log('iCal error:',e.message);
   }
   // Auto-refresh every 10 minutes
-  setTimeout(loadCalendar, 10*60*1000);
+  setTimeout(()=>loadCalendar(0), 10*60*1000);
 }
 
 function renderFallbackSchedule(){
@@ -1255,6 +1275,8 @@ function replaceEmojis(){
 // Also replace in dynamically generated content
 const _origRenderCalendar = typeof renderCalendar === 'function' ? renderCalendar : null;
 
+// Wake API immediately on load, then fetch
+pingAPI();
 loadBriefing();
 loadCalendar();
 updateDayTracker();
