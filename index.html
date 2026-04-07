@@ -1385,7 +1385,7 @@ const PIN_CODE = '1701'; // Change this to your 4-digit PIN (default: 1701 — N
 let pinEntry = '';
 let pinLocked = true;
 
-function pinPress(digit) {
+window.pinPress = function(digit) {
   if (!pinLocked) return;
   pinEntry += digit;
   updatePinDots();
@@ -1398,7 +1398,7 @@ function pinPress(digit) {
   }
 }
 
-function pinDel() {
+window.pinDel = function() {
   pinEntry = pinEntry.slice(0, -1);
   updatePinDots();
   document.getElementById('pin-err').textContent = '';
@@ -1470,12 +1470,14 @@ async function saveNote() {
   document.getElementById('note-body-in').value  = '';
   renderNotes();
 }
+window.saveNote = saveNote;
 
 async function deleteNote(id) {
   notesData = notesData.filter(n => n.id !== id);
   await pushNotes();
   renderNotes();
 }
+window.deleteNote = deleteNote;
 
 async function pushNotes() {
   try {
@@ -1505,6 +1507,7 @@ async function exportNotes() {
     window.open(mailto);
   }
 }
+window.exportNotes = exportNotes;
 
 function renderNotes() {
   const el = document.getElementById('notes-list');
