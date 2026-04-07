@@ -510,6 +510,7 @@ canvas{display:block;}
         <button class="nav-item nid" onclick="P('ideas');toggleNavMenu()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg> IDEAS</button>
         <button class="nav-item nsys" onclick="P('system');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-gear"/></svg>SYSTEM</button>
         <button class="nav-item" style="color:var(--a4);" onclick="P('notes');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-chart"/></svg>NOTES</button>
+        <button class="nav-item" style="color:#00CCFF;" onclick="runShortcut('');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-launch"/></svg>SHORTCUTS</button>
         <button class="nav-item nwx" onclick="P('weather');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-wx-cloud"/></svg>WEATHER</button>
         <button class="nav-item nmp" onclick="P('map');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-map"/></svg>MAP</button>
         <button class="nav-item nst" onclick="P('stars');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-stars"/></svg>STARS</button>
@@ -529,6 +530,8 @@ canvas{display:block;}
     <div class="sb s3" onclick="P('tasks')">TASKS</div>
     <div class="sb s5 sm"></div>
     <div class="sb s5" onclick="P('ideas')">IDEAS</div>
+    <div class="sb sm" style="background:var(--a4);opacity:0.3;"></div>
+    <div class="sb" style="background:var(--a4);color:#000;" onclick="P('notes')">NOTES</div>
     <div class="sb s6 sm"></div>
     <div class="sb s6" onclick="P('weather')">WX</div>
     <div class="ssp"></div>
@@ -895,6 +898,7 @@ canvas{display:block;}
     <button class="fc" onclick="P('gigs')">GIGS</button>
     <button class="fc" onclick="P('map')">MAP</button>
     <button class="fc" onclick="P('stars')">STARS</button>
+    <button class="fc" onclick="P('notes')" style="color:var(--a4);">NOTES</button>
     <div class="ft" id="fclock">--:--</div>
   </div>
   <div class="fp"></div>
@@ -1502,6 +1506,17 @@ function renderNotes() {
       </div>
     </div>`).join('');
 }
+
+function runShortcut(name) {
+  const shortcuts = {
+    'add-event': 'shortcuts://run-shortcut?name=LCARS%20Add%20Event',
+    'add-reminder': 'shortcuts://run-shortcut?name=LCARS%20Add%20Reminder',
+    'add-note': 'shortcuts://run-shortcut?name=LCARS%20Add%20Note',
+  };
+  const url = shortcuts[name] || 'shortcuts://';
+  window.location.href = url;
+}
+window.runShortcut = runShortcut;
 
 // ═══ INIT ═══
 fetchWeather();
