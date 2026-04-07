@@ -1027,7 +1027,7 @@ function P(name){
   const lbl=document.getElementById('nav-active-label');
   if(lbl)lbl.textContent=PAGE_LABELS[name]||name.toUpperCase();
   const m=document.getElementById('nav-menu');if(m)m.style.display='none';
-  if(name==='map')setTimeout(drawMap,80);
+  if(name==='stars')setTimeout(drawStars,80);
   if(name==='stars')setTimeout(drawStars,80);
 }
 
@@ -1286,6 +1286,8 @@ function renderCalendar(events){
       }).join('');
     }
   }
+  // Schedule page — today + upcoming
+  if(c){
     let html='';
     if(today.length){
       html+=`<div class="phl" style="color:var(--g);opacity:0.7;font-size:0.56rem;letter-spacing:0.15em;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(0,255,136,0.1);">TODAY</div>`;
@@ -1301,33 +1303,7 @@ function renderCalendar(events){
   }
 }
 
-// ═══ MAP ═══
-let maf=null;
-function drawMap(){
-  const C=document.getElementById('map-container'),cv=document.getElementById('map-canvas');
-  if(!C||!cv)return;if(maf)cancelAnimationFrame(maf);
-  const W=C.offsetWidth,H=C.offsetHeight;cv.width=W;cv.height=H;
-  const ctx=cv.getContext('2d'),cx=W*.42,cy=H*.48;
-  function rd(){
-    ctx.fillStyle='#000510';ctx.fillRect(0,0,W,H);
-    ctx.strokeStyle='rgba(68,136,255,0.1)';ctx.lineWidth=1;
-    for(let x=0;x<W;x+=28){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
-    for(let y=0;y<H;y+=28){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-    [45,90,145,200].forEach((r,i)=>{ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=`rgba(68,136,255,${.07+i*.025})`;ctx.lineWidth=1;ctx.stroke();});
-    [[0,H*.48,W,H*.48],[W*.42,0,W*.42,H],[0,H*.3,W,H*.3],[0,H*.65,W,H*.65],[W*.25,0,W*.25,H],[W*.62,0,W*.62,H],[W*.8,0,W*.8,H]].forEach(([x1,y1,x2,y2])=>{ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle='rgba(68,136,255,0.18)';ctx.lineWidth=2;ctx.stroke();});
-    [{x:W*.66,y:H*.76,l:'1 HOTEL',c:'#CC4444'},{x:W*.86,y:H*.34,l:'MAR-A-LAGO',c:'#FF9900'},{x:W*.42,y:H*.55,l:'701 BOUTWELL',c:'#FFCC66'}].forEach(g=>{
-      ctx.beginPath();ctx.arc(g.x,g.y,5,0,Math.PI*2);ctx.fillStyle=g.c;ctx.fill();
-      ctx.beginPath();ctx.arc(g.x,g.y,10,0,Math.PI*2);ctx.strokeStyle=g.c+'55';ctx.lineWidth=1;ctx.stroke();
-      ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(g.x,g.y);ctx.strokeStyle=g.c+'2a';ctx.lineWidth=1;ctx.setLineDash([4,7]);ctx.stroke();ctx.setLineDash([]);
-      ctx.fillStyle=g.c;ctx.font='bold 8px Share Tech Mono';ctx.fillText(g.l,g.x+8,g.y+4);
-    });
-    ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle='#00FF88';ctx.fill();
-    ctx.fillStyle='#00FF88';ctx.font='bold 9px Antonio';ctx.fillText('◈ YOU',cx+9,cy-8);
-  }
-  rd();let pr=12,pa=.6;
-  function anim(){rd();ctx.beginPath();ctx.arc(cx,cy,pr,0,Math.PI*2);ctx.strokeStyle=`rgba(0,255,136,${pa})`;ctx.lineWidth=1.5;ctx.stroke();pr+=.7;pa-=.013;if(pr>52){pr=12;pa=.6;}maf=requestAnimationFrame(anim);}
-  anim();
-}
+// ═══ MAP ═══ (static Apple Maps links — no canvas needed)
 
 // ═══ STAR MAP ═══
 const NS=[
@@ -1378,7 +1354,7 @@ function drawStars(){
   if(so){so.innerHTML=vis.sort((a,b)=>a.m-b.m).slice(0,8).map(s=>`<div class="ni"><div class="nico">★</div><div class="ntx" style="color:#8899DD;">${s.n.toUpperCase()}</div><div class="nts">ALT ${Math.round(s.alt)}° MAG ${s.m.toFixed(1)}</div></div>`).join('');}
 }
 
-window.addEventListener('resize',()=>{const pg=document.querySelector('.page.active');if(pg?.id==='page-map')drawMap();if(pg?.id==='page-stars')drawStars();});
+window.addEventListener('resize',()=>{const pg=document.querySelector('.page.active');if(pg?.id==='page-stars')drawStars();});
 
 // ═══ PIN LOCK ═══
 const PIN_CODE = '1701'; // Change this to your 4-digit PIN (default: 1701 — NCC-1701)
