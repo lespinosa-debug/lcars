@@ -320,6 +320,45 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .bg{background:var(--g);}.by{background:var(--a4);}.brr{background:var(--a1);}
 .snv{font-family:'Share Tech Mono',monospace;font-size:0.5rem;color:rgba(255,255,255,0.35);margin-top:3px;font-weight:700;}
 
+/* PIN LOCK SCREEN */
+#pin-lock{position:fixed;inset:0;background:#000;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;}
+#pin-lock.unlocked{animation:pinFade 0.5s ease forwards;}
+@keyframes pinFade{to{opacity:0;pointer-events:none;}}
+.pin-logo{font-size:0.52rem;letter-spacing:0.25em;color:var(--p);opacity:0.6;text-align:center;}
+.pin-title{font-size:1.3rem;letter-spacing:0.2em;color:var(--p);text-align:center;}
+.pin-sub{font-family:'Share Tech Mono',monospace;font-size:0.52rem;letter-spacing:0.12em;color:rgba(255,153,0,0.45);text-align:center;}
+.pin-dots{display:flex;gap:14px;justify-content:center;margin:6px 0;}
+.pin-dot{width:13px;height:13px;border-radius:50%;border:2px solid rgba(255,153,0,0.35);transition:all 0.15s;}
+.pin-dot.filled{background:var(--p);border-color:var(--p);box-shadow:0 0 8px var(--p);}
+.pin-dot.error{background:var(--a1);border-color:var(--a1);box-shadow:0 0 8px var(--a1);}
+.pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:230px;}
+.pin-btn{background:rgba(255,153,0,0.07);border:1px solid rgba(255,153,0,0.18);border-radius:8px;color:var(--p);font-family:'Antonio',sans-serif;font-size:1.5rem;font-weight:700;padding:13px;cursor:pointer;transition:all 0.1s;-webkit-appearance:none;}
+.pin-btn:active{background:rgba(255,153,0,0.25);transform:scale(0.95);}
+.pin-btn.pin-del{font-size:0.9rem;color:rgba(255,153,0,0.55);}
+.pin-btn.pin-empty{background:transparent;border:none;pointer-events:none;}
+.pin-err{font-family:'Share Tech Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;color:var(--a1);text-align:center;height:14px;}
+
+/* NOTES */
+.note-card{background:rgba(255,204,102,0.05);border:1px solid rgba(255,204,102,0.15);border-left:3px solid var(--a4);border-radius:4px;padding:10px 12px;margin-bottom:8px;}
+.note-title{font-size:0.78rem;letter-spacing:0.1em;color:var(--a4);margin-bottom:4px;}
+.note-body{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.65);line-height:1.7;white-space:pre-wrap;word-break:break-word;}
+.note-meta{font-family:'Share Tech Mono',monospace;font-size:0.48rem;color:rgba(255,204,102,0.3);margin-top:6px;display:flex;justify-content:space-between;align-items:center;}
+.note-del{background:none;border:none;color:rgba(204,68,68,0.45);font-size:0.65rem;cursor:pointer;padding:2px 6px;-webkit-appearance:none;}
+.note-del:active{color:var(--a1);}
+.note-input{width:100%;background:rgba(255,204,102,0.04);border:1px solid rgba(255,204,102,0.18);border-radius:4px;color:#fff;font-family:'Share Tech Mono',monospace;font-size:0.63rem;padding:8px 10px;resize:vertical;min-height:72px;-webkit-appearance:none;outline:none;}
+.note-input:focus{border-color:rgba(255,204,102,0.45);}
+.note-title-input{width:100%;background:rgba(255,204,102,0.04);border:1px solid rgba(255,204,102,0.18);border-radius:4px;color:var(--a4);font-family:'Antonio',sans-serif;font-size:0.78rem;letter-spacing:0.1em;padding:7px 10px;margin-bottom:6px;-webkit-appearance:none;outline:none;}
+.note-title-input:focus{border-color:rgba(255,204,102,0.45);}
+.note-actions{display:flex;gap:6px;margin-top:6px;}
+.note-btn{flex:1;background:rgba(255,204,102,0.08);border:1px solid rgba(255,204,102,0.22);border-radius:4px;color:var(--a4);font-family:'Antonio',sans-serif;font-size:0.68rem;letter-spacing:0.1em;padding:8px;cursor:pointer;-webkit-appearance:none;}
+.note-btn:active{background:rgba(255,204,102,0.22);}
+.note-btn.note-export{background:rgba(0,255,136,0.07);border-color:rgba(0,255,136,0.18);color:var(--g);}
+.note-btn.note-export:active{background:rgba(0,255,136,0.18);}
+
+/* CLICKABLE LOCATION */
+.loc-link{color:inherit;text-decoration:none;cursor:pointer;}
+.loc-link:active{opacity:0.6;}
+
 /* WEATHER */
 .wx-cell{border:1px solid rgba(34,85,170,0.25);padding:7px 9px;}
 .wx-cn{font-size:0.48rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:700;margin-bottom:2px;}
@@ -394,6 +433,34 @@ canvas{display:block;}
 </head>
 <body>
 <div id="ts"></div><div id="tb">LOADING...</div>
+<!-- PIN LOCK SCREEN -->
+<div id="pin-lock">
+  <div class="pin-logo">LCARS ESPINOSA COMMAND v3</div>
+  <div class="pin-title">AUTHORIZATION REQUIRED</div>
+  <div class="pin-sub">ENTER ACCESS CODE</div>
+  <div class="pin-dots">
+    <div class="pin-dot" id="pd0"></div>
+    <div class="pin-dot" id="pd1"></div>
+    <div class="pin-dot" id="pd2"></div>
+    <div class="pin-dot" id="pd3"></div>
+  </div>
+  <div class="pin-err" id="pin-err"></div>
+  <div class="pin-grid">
+    <button class="pin-btn" onclick="pinPress('1')">1</button>
+    <button class="pin-btn" onclick="pinPress('2')">2</button>
+    <button class="pin-btn" onclick="pinPress('3')">3</button>
+    <button class="pin-btn" onclick="pinPress('4')">4</button>
+    <button class="pin-btn" onclick="pinPress('5')">5</button>
+    <button class="pin-btn" onclick="pinPress('6')">6</button>
+    <button class="pin-btn" onclick="pinPress('7')">7</button>
+    <button class="pin-btn" onclick="pinPress('8')">8</button>
+    <button class="pin-btn" onclick="pinPress('9')">9</button>
+    <button class="pin-btn pin-empty"></button>
+    <button class="pin-btn" onclick="pinPress('0')">0</button>
+    <button class="pin-btn pin-del" onclick="pinDel()">⌫</button>
+  </div>
+</div>
+
 <div id="app">
 
 <!-- HEADER -->
@@ -442,6 +509,7 @@ canvas{display:block;}
         <button class="nav-item ntsk" onclick="P('tasks');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-check"/></svg>TASKS</button>
         <button class="nav-item nid" onclick="P('ideas');toggleNavMenu()"><svg class="ico" width="13" height="13" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-idea"/></svg> IDEAS</button>
         <button class="nav-item nsys" onclick="P('system');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-gear"/></svg>SYSTEM</button>
+        <button class="nav-item" style="color:var(--a4);" onclick="P('notes');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-chart"/></svg>NOTES</button>
         <button class="nav-item nwx" onclick="P('weather');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-wx-cloud"/></svg>WEATHER</button>
         <button class="nav-item nmp" onclick="P('map');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-map"/></svg>MAP</button>
         <button class="nav-item nst" onclick="P('stars');toggleNavMenu()"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;margin-right:6px;"><use href="#ico-stars"/></svg>STARS</button>
@@ -598,8 +666,8 @@ canvas{display:block;}
       <div class="dh pr" onclick="P('home')"><div class="bk" style="color:var(--a1);border-color:rgba(204,68,68,0.3)">◀ BACK</div><div class="dtit" style="color:var(--a1)">GIGS & WORK</div><div class="pid">SYS-4402</div></div>
       <div class="pn pr">
         <div class="phl" style="color:var(--a1);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">ACTIVE ASSIGNMENTS</div>
-        <div class="gc"><div class="gst stc">CONFIRMED // MON APR 6</div><div class="gti">MPM BIOIMPACT 2026</div><div class="gme">JOB# CO445054116 — CORINTHIAN EVENTS<br><svg class="ico" width="12" height="12" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-loc"/></svg> 1 Hotel South Beach, 2341 Collins Ave, Miami Beach FL<br>📅 APR 06 // 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER 01SU</div></div>
-        <div class="gc"><div class="gst stu">UPCOMING // FRI APR 10</div><div class="gti">SELFLESS LOVE GALA</div><div class="gme">JOB# CO434693835<br><svg class="ico" width="12" height="12" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-loc"/></svg> Mar-a-Lago Club, 1100 S. Ocean Blvd, Palm Beach FL<br>📅 APR 10 // 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER 02SU</div></div>
+        <div class="gc"><div class="gst stc">CONFIRMED // MON APR 6</div><div class="gti">MPM BIOIMPACT 2026</div><div class="gme">JOB# CO445054116 — CORINTHIAN EVENTS<br><svg class="ico" width="12" height="12" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-loc"/></svg> <a href="https://maps.apple.com/?q=1+Hotel+South+Beach,2341+Collins+Ave,Miami+Beach,FL" target="_blank" class="loc-link">1 Hotel South Beach, 2341 Collins Ave, Miami Beach FL</a><br>📅 APR 06 // 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER 01SU</div></div>
+        <div class="gc"><div class="gst stu">UPCOMING // FRI APR 10</div><div class="gti">SELFLESS LOVE GALA</div><div class="gme">JOB# CO434693835<br><svg class="ico" width="12" height="12" viewBox="0 0 24 24" style="color:currentColor;vertical-align:middle;"><use href="#ico-loc"/></svg> <a href="https://maps.apple.com/?q=Mar-a-Lago,1100+S+Ocean+Blvd,Palm+Beach,FL" target="_blank" class="loc-link">Mar-a-Lago Club, 1100 S. Ocean Blvd, Palm Beach FL</a><br>📅 APR 10 // 09:00–19:00</div><div class="gro">▸ VIDEO ENGINEER 02SU</div></div>
       </div>
       <div class="pn pr">
         <div class="phl" style="color:var(--a1);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">GIG PREP CHECKLIST</div>
@@ -651,6 +719,28 @@ canvas{display:block;}
         <div class="ni"><div class="nico">📋</div><div class="ntx">Monday.com ↔ Claude API bridge</div><div class="nts">APR 4</div></div>
         <div class="ni"><div class="nico">📧</div><div class="ntx">GSuite deep integration — post API</div><div class="nts">APR 4</div></div>
         <div class="ni"><div class="nico">📅</div><div class="ntx">Multi-calendar iCal feed — live in LCARS</div><div class="nts">APR 4</div></div>
+      </div>
+    </div>
+
+    <!-- NOTES PAGE -->
+    <div id="page-notes" class="page">
+      <div class="dh" style="background:rgba(255,204,102,0.08);border-bottom:1px solid rgba(255,204,102,0.15);" onclick="P('home')">
+        <div class="bk" style="color:var(--a4);border-color:rgba(255,204,102,0.3)">◀ BACK</div>
+        <div class="dtit" style="color:var(--a4)">FIELD NOTES</div>
+        <div class="pid">SYS-4409</div>
+      </div>
+      <div class="pn" style="border-color:rgba(255,204,102,0.15);">
+        <div class="phl" style="color:var(--a4);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">NEW ENTRY</div>
+        <input class="note-title-input" id="note-title-in" placeholder="TITLE — OPTIONAL" autocomplete="off" autocorrect="off" spellcheck="false"/>
+        <textarea class="note-input" id="note-body-in" placeholder="Enter note..."></textarea>
+        <div class="note-actions">
+          <button class="note-btn" onclick="saveNote()">+ SAVE NOTE</button>
+          <button class="note-btn note-export" onclick="exportNotes()">✉ EMAIL NOTES</button>
+        </div>
+      </div>
+      <div class="pn" style="border-color:rgba(255,204,102,0.15);">
+        <div class="phl" style="color:var(--a4);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">◈ STORED ENTRIES</div>
+        <div id="notes-list"><div class="ssu" style="color:var(--dim);padding:6px 0;">NO NOTES YET — CREATE ONE ABOVE</div></div>
       </div>
     </div>
 
@@ -711,19 +801,67 @@ canvas{display:block;}
     <!-- MAP PAGE -->
     <div id="page-map" class="page">
       <div class="dh pbl" onclick="P('home')"><div class="bk" style="color:#4488FF;border-color:rgba(68,136,255,0.3)">◀ BACK</div><div class="dtit" style="color:#4488FF">NAVIGATION</div><div class="pid">SYS-4406</div></div>
-      <div class="pn pbl">
-        <div class="phl" style="color:#4488FF;opacity:1;margin-bottom:7px;font-size:0.56rem;letter-spacing:0.18em;">CURRENT POSITION</div>
-        <div id="map-container">
-          <canvas id="map-canvas"></canvas>
-          <div class="mo" style="color:#4488FF;text-shadow:0 0 8px #4488FF;">◈ TRACKING ACTIVE</div>
-          <div class="mor" style="color:rgba(68,136,255,0.6)">CORAL SPRINGS FL<br>BROWARD COUNTY</div>
-          <div class="mbo" style="color:#4488FF;">LAT 26.2562°N · LON 80.2497°W</div>
+
+      <!-- CURRENT POSITION -->
+      <div class="pn pbl" style="border-color:rgba(68,136,255,0.2);">
+        <div class="phl" style="color:#4488FF;opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">◈ CURRENT POSITION</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
+          <div class="sysn"><div class="snn">Home Base</div><div class="sns" style="color:#4488FF;font-size:0.62rem;">CORAL SPRINGS</div><div class="snv">FL 33071</div></div>
+          <div class="sysn"><div class="snn">Warehouse</div><div class="sns" style="color:var(--a4);font-size:0.62rem;">701 BOUTWELL</div><div class="snv">CORAL SPRINGS</div></div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:6px;">
-          <div class="sysn"><div class="snn">Location</div><div class="sns son" style="font-size:0.62rem;">CORAL SPRINGS</div><div class="snv">FL 33071</div></div>
-          <div class="sysn"><div class="snn">Work/Warehouse</div><div class="sns swn" style="font-size:0.62rem;">701 BOUTWELL</div><div class="snv">CORAL SPRINGS</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+          <a href="https://maps.apple.com/?q=Coral+Springs,FL&sll=26.2562,-80.2497" target="_blank" style="background:rgba(68,136,255,0.1);border:1px solid rgba(68,136,255,0.25);border-radius:5px;color:#4488FF;font-family:'Antonio',sans-serif;font-size:0.7rem;letter-spacing:0.1em;padding:10px;text-align:center;text-decoration:none;display:block;">◈ MY LOCATION</a>
+          <a href="https://maps.apple.com/?daddr=701+Boutwell+Rd,Coral+Springs,FL&dirflg=d" target="_blank" style="background:rgba(255,204,102,0.08);border:1px solid rgba(255,204,102,0.2);border-radius:5px;color:var(--a4);font-family:'Antonio',sans-serif;font-size:0.7rem;letter-spacing:0.1em;padding:10px;text-align:center;text-decoration:none;display:block;">▸ DIRECTIONS HOME</a>
         </div>
       </div>
+
+      <!-- ACTIVE GIGS -->
+      <div class="pn pbl" style="border-color:rgba(68,136,255,0.2);">
+        <div class="phl" style="color:var(--a1);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">ACTIVE GIG LOCATIONS</div>
+        <a href="https://maps.apple.com/?daddr=1+Hotel+South+Beach,2341+Collins+Ave,Miami+Beach,FL&dirflg=d" target="_blank" class="si" style="text-decoration:none;display:flex;margin-bottom:2px;">
+          <div class="stm" style="color:var(--a1);min-width:52px;">APR 6</div>
+          <div class="sbar" style="background:var(--a1);"></div>
+          <div class="sin">
+            <div class="sti">1 Hotel South Beach</div>
+            <div class="ssu">2341 COLLINS AVE, MIAMI BEACH · TAP FOR DIRECTIONS</div>
+          </div>
+        </a>
+        <a href="https://maps.apple.com/?daddr=Mar-a-Lago,1100+S+Ocean+Blvd,Palm+Beach,FL&dirflg=d" target="_blank" class="si" style="text-decoration:none;display:flex;">
+          <div class="stm" style="color:var(--p);min-width:52px;">APR 10</div>
+          <div class="sbar" style="background:var(--p);"></div>
+          <div class="sin">
+            <div class="sti">Mar-a-Lago Club</div>
+            <div class="ssu">1100 S OCEAN BLVD, PALM BEACH · TAP FOR DIRECTIONS</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- SAVED LOCATIONS -->
+      <div class="pn pbl" style="border-color:rgba(68,136,255,0.2);">
+        <div class="phl" style="color:#4488FF;opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">SAVED LOCATIONS</div>
+        <a href="https://maps.apple.com/?daddr=701+Boutwell+Rd,Coral+Springs,FL&dirflg=d" target="_blank" class="si" style="text-decoration:none;display:flex;margin-bottom:2px;">
+          <div class="stm" style="color:var(--a4);min-width:52px;">BASE</div>
+          <div class="sbar" style="background:var(--a4);"></div>
+          <div class="sin"><div class="sti">701 Boutwell Rd</div><div class="ssu">CORAL SPRINGS · WAREHOUSE / BASE OF OPS</div></div>
+        </a>
+        <a href="https://maps.apple.com/?daddr=Amerant+Bank+Arena,601+Biscayne+Blvd,Miami,FL&dirflg=d" target="_blank" class="si" style="text-decoration:none;display:flex;margin-bottom:2px;">
+          <div class="stm" style="color:#4488FF;min-width:52px;">VEN</div>
+          <div class="sbar" style="background:#4488FF;"></div>
+          <div class="sin"><div class="sti">Amerant Bank Arena</div><div class="ssu">601 BISCAYNE BLVD, MIAMI</div></div>
+        </a>
+        <a href="https://maps.apple.com/?daddr=Broward+County+Convention+Center,1950+Eisenhower+Blvd,Fort+Lauderdale,FL&dirflg=d" target="_blank" class="si" style="text-decoration:none;display:flex;">
+          <div class="stm" style="color:#4488FF;min-width:52px;">VEN</div>
+          <div class="sbar" style="background:#4488FF;"></div>
+          <div class="sin"><div class="sti">Broward Conv. Center</div><div class="ssu">1950 EISENHOWER BLVD, FT LAUDERDALE</div></div>
+        </a>
+      </div>
+
+      <!-- CALENDAR LOCATIONS — populated dynamically -->
+      <div class="pn pbl" style="border-color:rgba(68,136,255,0.2);" id="map-cal-locations" style="display:none;">
+        <div class="phl" style="color:var(--g);opacity:1;margin-bottom:9px;font-size:0.56rem;letter-spacing:0.18em;">FROM CALENDAR</div>
+        <div id="map-cal-list"><div class="ssu" style="color:var(--dim);">LOADING CALENDAR LOCATIONS...</div></div>
+      </div>
+
     </div>
 
     <!-- STARS PAGE -->
@@ -871,7 +1009,7 @@ function tick(){
 tick();setInterval(tick,1000);
 
 // ═══ NAVIGATION ═══
-const PAGE_LABELS={home:'HOME',schedule:'SCHEDULE',gigs:'GIGS & WORK',tasks:'TASKS',ideas:'IDEAS & NUGGETS',system:'SYSTEM',weather:'WEATHER',map:'MAP',stars:'STARS'};
+const PAGE_LABELS={home:'HOME',schedule:'SCHEDULE',gigs:'GIGS & WORK',tasks:'TASKS',ideas:'IDEAS & NUGGETS',system:'SYSTEM',weather:'WEATHER',map:'MAP',stars:'STARS',notes:'FIELD NOTES'};
 
 function toggleNavMenu(){
   const m=document.getElementById('nav-menu');
@@ -1017,7 +1155,8 @@ async function pingAPI(){
 async function loadCalendar(retryCount=0){
   const URLS=[
     'https://calendar.google.com/calendar/ical/lespinosa%40frostflorida.com/private-1bb59553e99af6e8fc4f4d2074182626/basic.ics',   // 0 orange  FROST WORK
-    'webcal://p135-caldav.icloud.com/published/2/MTAzNTE5Mzk4NDIxMDM1MRH7oMYq2vnBm9PGGEMy-6_OjOARgb-NBp5vXUkh4D1m',              // 1 red     LCARS
+    'https://calendar.google.com/calendar/ical/c_onnn1dvi37rh9fdireb8a81i4c%40group.calendar.google.com/public/basic.ics',         // 1 red     FROST SHOWS
+    // ADD YOUR REMAINING iCAL URLs BELOW — paste from Google Calendar settings
     // 'https://calendar.google.com/calendar/ical/luislre%40gmail.com/private-XXXXX/basic.ics',          // 2 purple  PERSONAL
     // 'https://calendar.google.com/calendar/ical/SHARED_CAL_ID%40group.calendar.google.com/public/basic.ics', // 3 blue    SKYE & LUIS
     // 'https://calendar.google.com/calendar/ical/SCHOOL_CAL_ID%40group.calendar.google.com/public/basic.ics', // 4 green   SCHOOL
@@ -1101,12 +1240,16 @@ function renderCalendar(events){
     const isPast=eEnd<now;
     const isNow=eStart<=now&&eEnd>=now;
     const timeLabel=showDate?fmtDate(e.start):fmtTime(e.start);
+    const locText = e.location ? e.location.split(',')[0].toUpperCase() : '';
+    const locLink = e.location
+      ? `<a href="https://maps.apple.com/?q=${encodeURIComponent(e.location)}" target="_blank" class="loc-link">${locText}</a>`
+      : '';
     return `<div class="si" style="opacity:${isPast?'0.4':'1'}">
       <div class="stm" style="color:${isNow?'var(--g)':color};min-width:52px;">${timeLabel}</div>
       <div class="sbar" style="background:${color};${isNow?'box-shadow:0 0 6px '+color:''}"></div>
       <div class="sin">
         <div class="sti" style="color:#fff">${e.title||'EVENT'}${isNow?'<span class="nbadge">NOW</span>':''}</div>
-        <div class="ssu">${cal}${e.location?' · '+e.location.split(',')[0].toUpperCase():''}</div>
+        <div class="ssu">${cal}${locLink?' · '+locLink:''}</div>
       </div>
     </div>`;
   };
@@ -1122,8 +1265,27 @@ function renderCalendar(events){
     }
   }
 
-  // Schedule page — today + upcoming
-  if(c){
+  // Map page — inject calendar locations
+  const mapCal = document.getElementById('map-cal-locations');
+  const mapCalList = document.getElementById('map-cal-list');
+  if (mapCalList) {
+    const withLoc = [...today, ...upcoming].filter(e => e.location);
+    if (withLoc.length) {
+      if (mapCal) mapCal.style.display = '';
+      mapCalList.innerHTML = withLoc.map(e => {
+        const color = CAL_COLORS[e.calendarIndex||0] || '#FF9900';
+        const label = fmtDate(e.start);
+        return `<a href="https://maps.apple.com/?daddr=${encodeURIComponent(e.location)}&dirflg=d" target="_blank" class="si" style="text-decoration:none;display:flex;margin-bottom:2px;">
+          <div class="stm" style="color:${color};min-width:52px;">${label}</div>
+          <div class="sbar" style="background:${color};"></div>
+          <div class="sin">
+            <div class="sti">${e.title||'EVENT'}</div>
+            <div class="ssu">${e.location.toUpperCase()} · TAP FOR DIRECTIONS</div>
+          </div>
+        </a>`;
+      }).join('');
+    }
+  }
     let html='';
     if(today.length){
       html+=`<div class="phl" style="color:var(--g);opacity:0.7;font-size:0.56rem;letter-spacing:0.15em;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(0,255,136,0.1);">TODAY</div>`;
@@ -1218,6 +1380,150 @@ function drawStars(){
 
 window.addEventListener('resize',()=>{const pg=document.querySelector('.page.active');if(pg?.id==='page-map')drawMap();if(pg?.id==='page-stars')drawStars();});
 
+// ═══ PIN LOCK ═══
+const PIN_CODE = '1701'; // Change this to your 4-digit PIN (default: 1701 — NCC-1701)
+let pinEntry = '';
+let pinLocked = true;
+
+function pinPress(digit) {
+  if (!pinLocked) return;
+  pinEntry += digit;
+  updatePinDots();
+  if (pinEntry.length === 4) {
+    if (pinEntry === PIN_CODE) {
+      pinUnlock();
+    } else {
+      pinError();
+    }
+  }
+}
+
+function pinDel() {
+  pinEntry = pinEntry.slice(0, -1);
+  updatePinDots();
+  document.getElementById('pin-err').textContent = '';
+}
+
+function updatePinDots() {
+  for (let i = 0; i < 4; i++) {
+    const d = document.getElementById('pd' + i);
+    if (!d) return;
+    d.classList.toggle('filled', i < pinEntry.length);
+    d.classList.remove('error');
+  }
+}
+
+function pinUnlock() {
+  pinLocked = false;
+  const lock = document.getElementById('pin-lock');
+  lock.classList.add('unlocked');
+  setTimeout(() => { lock.style.display = 'none'; }, 520);
+  sessionStorage.setItem('lcars_auth', '1');
+}
+
+function pinError() {
+  for (let i = 0; i < 4; i++) {
+    const d = document.getElementById('pd' + i);
+    if (d) { d.classList.add('error'); d.classList.remove('filled'); }
+  }
+  document.getElementById('pin-err').textContent = 'ACCESS DENIED — RETRY';
+  setTimeout(() => {
+    pinEntry = '';
+    updatePinDots();
+    document.getElementById('pin-err').textContent = '';
+  }, 900);
+}
+
+// Skip PIN if already authenticated this session
+if (sessionStorage.getItem('lcars_auth') === '1') {
+  pinLocked = false;
+  const lock = document.getElementById('pin-lock');
+  if (lock) lock.style.display = 'none';
+}
+
+// ═══ NOTES ═══
+let notesData = [];
+
+async function loadNotes() {
+  try {
+    const res = await fetch(`${API_URL}/api/store`);
+    const data = await res.json();
+    notesData = data.notes || [];
+    renderNotes();
+  } catch(e) { console.log('[NOTES] load error', e); }
+}
+
+async function saveNote() {
+  const title = document.getElementById('note-title-in')?.value.trim() || '';
+  const body  = document.getElementById('note-body-in')?.value.trim()  || '';
+  if (!body) return;
+  const note = {
+    id: Date.now(),
+    title: title || 'UNTITLED',
+    body,
+    date: new Date().toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' }),
+    time: new Date().toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', hour12:false }),
+  };
+  notesData.unshift(note);
+  await pushNotes();
+  document.getElementById('note-title-in').value = '';
+  document.getElementById('note-body-in').value  = '';
+  renderNotes();
+}
+
+async function deleteNote(id) {
+  notesData = notesData.filter(n => n.id !== id);
+  await pushNotes();
+  renderNotes();
+}
+
+async function pushNotes() {
+  try {
+    await fetch(`${API_URL}/api/store`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ notes: notesData })
+    });
+  } catch(e) { console.log('[NOTES] push error', e); }
+}
+
+async function exportNotes() {
+  if (!notesData.length) { alert('No notes to export.'); return; }
+  const text = notesData.map(n =>
+    `=== ${n.title} ===\n${n.date} ${n.time}\n\n${n.body}\n`
+  ).join('\n---\n\n');
+  try {
+    await fetch(`${API_URL}/api/notes/export`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ notes: notesData, text })
+    });
+    alert('Notes sent to lespinosa@frostflorida.com');
+  } catch(e) {
+    // fallback — open mail client
+    const mailto = `mailto:lespinosa@frostflorida.com?subject=LCARS Field Notes ${new Date().toLocaleDateString()}&body=${encodeURIComponent(text)}`;
+    window.open(mailto);
+  }
+}
+
+function renderNotes() {
+  const el = document.getElementById('notes-list');
+  if (!el) return;
+  if (!notesData.length) {
+    el.innerHTML = '<div class="ssu" style="color:var(--dim);padding:6px 0;">NO NOTES YET — CREATE ONE ABOVE</div>';
+    return;
+  }
+  el.innerHTML = notesData.map(n => `
+    <div class="note-card">
+      <div class="note-title">${n.title}</div>
+      <div class="note-body">${n.body.replace(/</g,'&lt;')}</div>
+      <div class="note-meta">
+        <span>${n.date} ${n.time}</span>
+        <button class="note-del" onclick="deleteNote(${n.id})">✕ DELETE</button>
+      </div>
+    </div>`).join('');
+}
+
 // ═══ INIT ═══
 fetchWeather();
 setInterval(fetchWeather,900000);
@@ -1298,6 +1604,7 @@ const _origRenderCalendar = typeof renderCalendar === 'function' ? renderCalenda
 pingAPI();
 loadBriefing();
 loadCalendar();
+loadNotes();
 updateDayTracker();
 setInterval(updateDayTracker, 60 * 1000);
 
