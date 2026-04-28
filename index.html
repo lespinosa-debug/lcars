@@ -271,7 +271,7 @@ const fetchBriefing = useCallback(async()=>{
 setLoading(true);
 setError(null);
 try {
-const resp = await fetch("https://api.anthropic.com/v1/messages",{
+const resp = await fetch("https://luis-cmd-proxy.lespinosa.workers.dev",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
