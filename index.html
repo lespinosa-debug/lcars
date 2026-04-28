@@ -275,7 +275,7 @@ const resp = await fetch("https://luis-cmd-proxy.lespinosa.workers.dev",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({
-model:"claude-sonnet-4-20250514",
+model:"claude-haiku-4-5-20251001",
 max_tokens:4000,
 system:`You are a daily briefing data compiler. Return ONLY valid JSON, no markdown, no preamble. Today is ${new Date().toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"})}. Timezone: America/New_York. User: Luis Espinosa, lespinosa@frostflorida.com, Coral Springs FL. Compile data from all available MCP tools into this exact JSON structure: {"weather":{"temp":number,"conditions":"string","rain":number,"high":number},"calendar":[{"time":"HH:MM","title":"string","location":"string"}],"email":{"urgent":[{"id":number,"sender":"string","from":"string","subject":"string","action":"string","time":"string"}],"starred":[same shape],"fyi":[same shape],"skipped":number},"drive":[{"title":"string","owner":"string","type":"PDF|Folder","event":"string","time":"string"}],"priorities":[{"rank":1-3,"title":"string","desc":"string"}]} Steps: 1) Search web for Coral Springs FL weather. 2) List today's calendar events. 3) Search Gmail: is:unread newer_than:2d (skip newsletters/promotions). Categorize into urgent (someone waiting for reply from known contacts: @frostflorida.com, @amplifiedeventstrategy.com, @clproductions.net, @apple.com), starred, fyi. 4) List 6 recent Drive files. 5) Determine top 3 priorities. Return ONLY the JSON.`,
 messages:[{role:"user",content:"Compile my daily briefing now."}],
